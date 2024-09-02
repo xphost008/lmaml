@@ -1,0 +1,335 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>编程语言的选择 - Let us Make A Minecraft Launcher</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="intro.html">导论</a></li><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="ProgrammingLanguage.html" class="active"><strong aria-hidden="true">1.</strong> 编程语言的选择</a></li><li class="chapter-item expanded "><a href="LaunchPrinciple.html"><strong aria-hidden="true">2.</strong> 启动原理</a></li><li class="chapter-item expanded "><a href="FirstChapter/intro.html"><strong aria-hidden="true">3.</strong> 第一章：启动游戏</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="FirstChapter/LaunchArguments.html"><strong aria-hidden="true">3.1.</strong> 讲解启动参数</a></li><li class="chapter-item expanded "><a href="FirstChapter/GetVersionFolder.html"><strong aria-hidden="true">3.2.</strong> 如何获取versions文件夹</a></li><li class="chapter-item expanded "><a href="FirstChapter/GetJVMAndArgument.html"><strong aria-hidden="true">3.3.</strong> 如何获取jvm、game参数</a></li><li class="chapter-item expanded "><a href="FirstChapter/GetCpLibraries.html"><strong aria-hidden="true">3.4.</strong> 如何获取cp-library值</a></li><li class="chapter-item expanded "><a href="FirstChapter/SupportInheritsFrom.html"><strong aria-hidden="true">3.5.</strong> 支持inheritsFrom下的MC</a></li><li class="chapter-item expanded "><a href="FirstChapter/LaunchGame/LaunchIntro.html"><strong aria-hidden="true">3.6.</strong> 启动游戏！</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="FirstChapter/LaunchGame/ReplaceTemplate.html"><strong aria-hidden="true">3.6.1.</strong> 替换字符串模板并启动游戏</a></li><li class="chapter-item expanded "><a href="FirstChapter/LaunchGame/UnzipNative.html"><strong aria-hidden="true">3.6.2.</strong> 解压Natives文件</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="SecondChapter/Intro.html"><strong aria-hidden="true">4.</strong> 第二章：账号部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="SecondChapter/OfflineLogin.html"><strong aria-hidden="true">4.1.</strong> 离线登录</a></li><li class="chapter-item expanded "><a href="SecondChapter/MicrosoftLogin.html"><strong aria-hidden="true">4.2.</strong> 微软登录</a></li><li class="chapter-item expanded "><a href="SecondChapter/OAuthLogin.html"><strong aria-hidden="true">4.3.</strong> 微软OAuth登录</a></li><li class="chapter-item expanded "><a href="SecondChapter/AuthlibInjectorLogin.html"><strong aria-hidden="true">4.4.</strong> Authlib-Injector第三方登录</a></li><li class="chapter-item expanded "><a href="SecondChapter/RefreshLogin.html"><strong aria-hidden="true">4.5.</strong> 刷新账号</a></li><li class="chapter-item expanded "><a href="SecondChapter/OfflineSkin.html"><strong aria-hidden="true">4.6.</strong> 离线登录皮肤</a></li></ol></li><li class="chapter-item expanded "><a href="ThirdChapter/Intro.html"><strong aria-hidden="true">5.</strong> 第三章：下载部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ThirdChapter/GetMCData.html"><strong aria-hidden="true">5.1.</strong> 获取MC元数据</a></li><li class="chapter-item expanded "><a href="ThirdChapter/DownloadLibraries.html"><strong aria-hidden="true">5.2.</strong> 下载libraries</a></li><li class="chapter-item expanded "><a href="ThirdChapter/DownloadAssets.html"><strong aria-hidden="true">5.3.</strong> 下载assets</a></li><li class="chapter-item expanded "><a href="ThirdChapter/SupportThread.html"><strong aria-hidden="true">5.4.</strong> 支持多线程下载</a></li><li class="chapter-item expanded "><a href="ThirdChapter/LaunchDownloadMC.html"><strong aria-hidden="true">5.5.</strong> 启动自己下载过后的MC</a></li><li class="chapter-item expanded "><a href="ThirdChapter/ModLoader/Intro.html"><strong aria-hidden="true">5.6.</strong> 模组加载器</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ThirdChapter/ModLoader/SupportFabricQuilt.html"><strong aria-hidden="true">5.6.1.</strong> 支持Fabric、Quilt自动安装</a></li><li class="chapter-item expanded "><a href="ThirdChapter/ModLoader/SupportNeoForge.html"><strong aria-hidden="true">5.6.2.</strong> 支持NeoForge自动安装</a></li></ol></li><li class="chapter-item expanded "><a href="ThirdChapter/CompleteMissingFiles.html"><strong aria-hidden="true">5.7.</strong> 补全MC的缺失文件</a></li><li class="chapter-item expanded "><a href="ThirdChapter/CheckFileHash.html"><strong aria-hidden="true">5.8.</strong> 校验文件的hash值</a></li></ol></li><li class="chapter-item expanded "><a href="TutorWriteTime.html"><strong aria-hidden="true">6.</strong> 教程书写时间</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Let us Make A Minecraft Launcher</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="我们应该如何选择我们的编程语言呢"><a class="header" href="#我们应该如何选择我们的编程语言呢">我们应该如何选择我们的编程语言呢？</a></h1>
+<p>本页教程专门供给<font color=blue>还没有学会任何一门编程语言的编程小白</font>所看。如果你已经学会了市面上任意一款编程语言且完全了解<font color=blue>导论中的前置版本中的必须支持部分对于此语言的语法规则</font>，那么你可以跳过本页不观看。但我依旧强烈的建议你还是看看比较好。</p>
+<p>编程语言的选择：</p>
+<ol>
+<li>Java：推荐指数：【⭐⭐⭐⭐】
+<ol>
+<li>其为Minecraft原生语言，有着众多的第三方库，例如swing GUI、网络请求、服务端、Json解析、XML解析等众多的模块。</li>
+<li>其语言生态也非常良好【tiobe排行老三】</li>
+<li>语法简单，流畅，清晰度高，如果开源的话非常容易让别人一目了然。</li>
+<li>唯一缺点：对于GUI生态不太好，需要javafx或者swing。而且swing太丑。javafx有点小小的复杂。</li>
+</ol>
+</li>
+<li>Python：推荐指数：【⭐⭐⭐⭐】
+<ol>
+<li>如果我说这是在编程语言界<font color=red>较为</font>简单的语言，这么说不过分吧。</li>
+<li>内部有众多的第三方库，如tkinter、requests、json等众多模块。</li>
+<li>语法也非常简单，但是如果开源不一定让人看得懂【按照缩进来执行，很容易搞蒙人。】</li>
+<li>语法生态良好，tiobe排行老大</li>
+<li>唯一缺点：解释性语言，运行速度过慢。</li>
+</ol>
+</li>
+<li>C#：推荐指数：【⭐⭐⭐⭐⭐】
+<ol>
+<li>这门语言为微软官方语言，其内部的Nuget包管理器能够使人轻松下载到众多的第三方库，例如Newtonsoft.JSON等模块。</li>
+<li>语法类似Java，且能直接编译成exe，高效简洁，但是对于跨平台有些许的不太支持【听说最近的.NET 7.0支持了跨平台，但是没尝试过。】</li>
+<li>语言生态良好。有着WPF这种易于写GUI的配方。</li>
+<li>不足之处：做好的软件发布到MCBBS上如果不开源很容易被别人认为成又是用启动模块写的，如KMCCC等。</li>
+</ol>
+</li>
+<li>C++：推荐指数：【⭐⭐⭐】
+<ol>
+<li>在编程语言界算是鼻祖，内部生态良好，有着Qt大公司支持，目前的C++23更是引领了众多人走向成功。</li>
+<li>语法<font color=red>较为困难</font>，但只要基本掌握，还是可以实现很多功能的。</li>
+<li>有很多第三方库，例如Qt自带的QWidget-GUI等。</li>
+<li><font color=orange>用此种语言制作的MC启动器建议不要开源。</font></li>
+</ol>
+</li>
+<li>VB.NET：推荐指数：【⭐⭐⭐】
+<ol>
+<li>众所不是那么的周知，<font color=red>PCL2启动器</font>就是拿这门语言开发的，因此可见这门语言的优势所在。</li>
+<li>语法不算很优雅，较为冗杂，也不算很出色，为什么叫VB呢，因为其为可视化基础语言。</li>
+<li>生态比较良好，但是<font color=orange>用此种语言制作的MC启动器建议不要开源。</font></li>
+</ol>
+</li>
+<li>易语言：推荐指数：【⭐⭐⭐】
+<ol>
+<li>为什么推荐易语言？因为这个语言是面向中国人的，对于中国人来说语法较为简单易懂。且有着著名的Module-Launcher启动模块支撑。</li>
+<li>语法较清晰，较简单，但是生态非常不好，<font color=red>且需要钱，很贵。</font>没钱的只能去网上找破解版的咯！</li>
+<li>通过ec后缀模块以及易语言IDE作为包管理工具，其最为出色的第三方库【精易模块】已成为许多易语言编程者必选的模块之一。</li>
+<li>不足之处：做好的软件发布到MCBBS上如果不开源很容易被别人认为成又是用启动模块写的。</li>
+<li>但是此项与第四项相悖，<font color=orange>用此种语言制作的MC启动器建议不要开源。</font></li>
+</ol>
+</li>
+<li>Go：推荐指数：【⭐⭐】
+<ol>
+<li>Go语言是面向服务器高并发式开发的，因此对后端程序不算太友好。但网上也有比较成熟的GUI库，例如walk库。</li>
+<li>Go语言内置了Json解析、网络请求功能，第三方库可以用Go Mod管理。总体上手难度不算高。</li>
+<li>生态良好、语言清晰度一般，但是一般不会有人拿这个去做MC启动器【GMCL是命令行式的，如果你可以做出一款用Go语言开发的GUI启动器，那可称为MCBBS第一人。】</li>
+</ol>
+</li>
+<li>Rust：推荐指数：【⭐⭐】
+<ol>
+<li>给你们个建议，如果不是非得使用冷门语言创作一款大软件，我是不太建议大家用这门语言的。因为这门语言上手难度<font color=red>较高</font>。</li>
+<li>有crate.io作为包管理器，非常轻松便能导入导出第三方库，如简单的GUI库：Druid。</li>
+<li>SCL启动器的作者Steve-XMH就是用这个语言写的启动器，其内部的bug多的数不胜数。自己去看看吧。</li>
+<li>这门语言主要是面向底层，面向操作系统的，当然也可以开发后端程序。但我不太建议使用这门语言。</li>
+</ol>
+</li>
+<li>TypeScript+Electron：推荐指数：【⭐】
+<ol>
+<li>人送外号电子垃圾，制作出来的软件体积较大【少则几百兆，多则几个G】。</li>
+<li>语法困难、不清晰、上手难度高，我直到现在都不懂怎么安装它的环境。</li>
+<li>生态不怎么好，但是依旧有人拿这个框架制作MC启动器【如XMCL】。</li>
+</ol>
+</li>
+</ol>
+<h2 id="总结"><a class="header" href="#总结">总结</a></h2>
+<p>好了，以上就是我给大家尽量推荐的语言，但是其中没有打星星符号的，要么就是太冷门，要么就是别的语言的孪生兄弟【如C和C++、Java和Kotlin等】。还有一些语言由于我自己都没尝试过书写Hello World。</p>
+<p>但是，有部分语言我没有列举在上面，例如Ruby语言，这一类的语言在MCBBS上从未有过启动器应用。因此我在这里不做过多的评价。当然了，我所给的都只是一个建议，如果你实在是<font color=red>精通</font><font color=orange>Rust、Ruby、甚至是COBOL</font>，这都取决于你。</p>
+<p>大家可以不按照我上面所说的语言建议，大家完全可以按照自己喜欢哪门语言，然后开始制作。总体来说大家必须要根据自身的实际情况来学习，比如说你只会用Python，但是我建议用C#的多，因此你就硬生生从Python转成了C#，我不太建议这么做哦！</p>
+<h2 id="本篇教程所使用的编程语言"><a class="header" href="#本篇教程所使用的编程语言">本篇教程所使用的编程语言</a></h2>
+<p>如果大家看过我的主页，看过了我的Little Limbo Launcher启动器，就说明了我是一个用Delphi/Object Pascal语言最熟悉的人了。就好比如说我熟悉Delphi，但是不太熟悉C#一样的。</p>
+<p><font color=green>我在本篇教程里使用的是【Python语言】，将更好的切合我们人类的思维方式。大家完全可以用自己的语言进行开发！本篇教程只是提供一个思路而已！主要目的就是提供一个编程思维。</font></p>
+<p>其次，为什么我上面并没有出现Delphi/Object Pascal语言呢？原因是<font color=orange>这门语言是需要付费才能下载</font>的，而我使用网上的破解版来编程【嘻嘻】，不同于免费的语言，因此我没有将其列举在上面。不过这门语言的内容也挺简洁高效的，语法规则也同样较类似于C#。而且这个语言生成的exe无需.NET FrameWork运行时框架即可运行。因此我制作LLL启动器时才会选择这个语言！</p>
+<p>但是本文选取的语言是Python 3.10版本及以上，主要是为了照顾各位能够使得各位更好理解文章内容噢！如果你还有什么不懂得，欢迎来主页找到Little Limbo Launcher开源网址，找到交流群，然后加群随时来询问我噢！</p>
+<p>如果各位对本文代码有任何优化建议，也可以进入gitee里的issue或者github的issue进行提议噢！本文也仅仅是给各位一个小小的思路，各位完全可以只看本文的思路部分，然后进行代码编辑。没必要完全只字不改的敲。<font color=red>我当然知道有部分启动器作者的代码比我简洁太多了，因此我才说看个逻辑而已，不要全部照抄。比如<a href="https://codeberg.org/JakobDev/minecraft-launcher-lib/">minecraft-launcher-lib</a>这个类库的逻辑就比我的简单……</font></p>
+<p>然后本文使用的GUI类库是delphivcl。各位可以通过以下命令安装。或者各位用PyQT也不是不行（都可以嘛！</p>
+<pre><code>pip install delphivcl
+</code></pre>
+<p>我们除了这个类库，很可能还会用到另一个类库：pywin32！该库包含了调用Windows API的几乎所有功能。</p>
+<pre><code>pip install pywin32
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="LaunchPrinciple.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="LaunchPrinciple.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

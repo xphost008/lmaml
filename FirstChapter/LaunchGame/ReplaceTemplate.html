@@ -1,0 +1,335 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>替换字符串模板并启动游戏 - Let us Make A Minecraft Launcher</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../intro.html">导论</a></li><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../../ProgrammingLanguage.html"><strong aria-hidden="true">1.</strong> 编程语言的选择</a></li><li class="chapter-item expanded "><a href="../../LaunchPrinciple.html"><strong aria-hidden="true">2.</strong> 启动原理</a></li><li class="chapter-item expanded "><a href="../../FirstChapter/intro.html"><strong aria-hidden="true">3.</strong> 第一章：启动游戏</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../FirstChapter/LaunchArguments.html"><strong aria-hidden="true">3.1.</strong> 讲解启动参数</a></li><li class="chapter-item expanded "><a href="../../FirstChapter/GetVersionFolder.html"><strong aria-hidden="true">3.2.</strong> 如何获取versions文件夹</a></li><li class="chapter-item expanded "><a href="../../FirstChapter/GetJVMAndArgument.html"><strong aria-hidden="true">3.3.</strong> 如何获取jvm、game参数</a></li><li class="chapter-item expanded "><a href="../../FirstChapter/GetCpLibraries.html"><strong aria-hidden="true">3.4.</strong> 如何获取cp-library值</a></li><li class="chapter-item expanded "><a href="../../FirstChapter/SupportInheritsFrom.html"><strong aria-hidden="true">3.5.</strong> 支持inheritsFrom下的MC</a></li><li class="chapter-item expanded "><a href="../../FirstChapter/LaunchGame/LaunchIntro.html"><strong aria-hidden="true">3.6.</strong> 启动游戏！</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../FirstChapter/LaunchGame/ReplaceTemplate.html" class="active"><strong aria-hidden="true">3.6.1.</strong> 替换字符串模板并启动游戏</a></li><li class="chapter-item expanded "><a href="../../FirstChapter/LaunchGame/UnzipNative.html"><strong aria-hidden="true">3.6.2.</strong> 解压Natives文件</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../SecondChapter/Intro.html"><strong aria-hidden="true">4.</strong> 第二章：账号部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../SecondChapter/OfflineLogin.html"><strong aria-hidden="true">4.1.</strong> 离线登录</a></li><li class="chapter-item expanded "><a href="../../SecondChapter/MicrosoftLogin.html"><strong aria-hidden="true">4.2.</strong> 微软登录</a></li><li class="chapter-item expanded "><a href="../../SecondChapter/OAuthLogin.html"><strong aria-hidden="true">4.3.</strong> 微软OAuth登录</a></li><li class="chapter-item expanded "><a href="../../SecondChapter/AuthlibInjectorLogin.html"><strong aria-hidden="true">4.4.</strong> Authlib-Injector第三方登录</a></li><li class="chapter-item expanded "><a href="../../SecondChapter/RefreshLogin.html"><strong aria-hidden="true">4.5.</strong> 刷新账号</a></li><li class="chapter-item expanded "><a href="../../SecondChapter/OfflineSkin.html"><strong aria-hidden="true">4.6.</strong> 离线登录皮肤</a></li></ol></li><li class="chapter-item expanded "><a href="../../ThirdChapter/Intro.html"><strong aria-hidden="true">5.</strong> 第三章：下载部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ThirdChapter/GetMCData.html"><strong aria-hidden="true">5.1.</strong> 获取MC元数据</a></li><li class="chapter-item expanded "><a href="../../ThirdChapter/DownloadLibraries.html"><strong aria-hidden="true">5.2.</strong> 下载libraries</a></li><li class="chapter-item expanded "><a href="../../ThirdChapter/DownloadAssets.html"><strong aria-hidden="true">5.3.</strong> 下载assets</a></li><li class="chapter-item expanded "><a href="../../ThirdChapter/SupportThread.html"><strong aria-hidden="true">5.4.</strong> 支持多线程下载</a></li><li class="chapter-item expanded "><a href="../../ThirdChapter/LaunchDownloadMC.html"><strong aria-hidden="true">5.5.</strong> 启动自己下载过后的MC</a></li><li class="chapter-item expanded "><a href="../../ThirdChapter/ModLoader/Intro.html"><strong aria-hidden="true">5.6.</strong> 模组加载器</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ThirdChapter/ModLoader/SupportFabricQuilt.html"><strong aria-hidden="true">5.6.1.</strong> 支持Fabric、Quilt自动安装</a></li><li class="chapter-item expanded "><a href="../../ThirdChapter/ModLoader/SupportNeoForge.html"><strong aria-hidden="true">5.6.2.</strong> 支持NeoForge自动安装</a></li></ol></li><li class="chapter-item expanded "><a href="../../ThirdChapter/CompleteMissingFiles.html"><strong aria-hidden="true">5.7.</strong> 补全MC的缺失文件</a></li><li class="chapter-item expanded "><a href="../../ThirdChapter/CheckFileHash.html"><strong aria-hidden="true">5.8.</strong> 校验文件的hash值</a></li></ol></li><li class="chapter-item expanded "><a href="../../TutorWriteTime.html"><strong aria-hidden="true">6.</strong> 教程书写时间</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Let us Make A Minecraft Launcher</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="字符串模板顾名思义就是json中双引号内的template"><a class="header" href="#字符串模板顾名思义就是json中双引号内的template">字符串模板，顾名思义就是json中双引号内的${template}。</a></h1>
+<p>一般情况下，美元符号右边一个大括号内的内容，如果在同一个字符串内出现多次，那多半是同一个意思。我们首先请看原版的字符串模板吧！ps：还是以原版1.19.4作为例子，下面我将介绍我已经拼接好的。</p>
+<pre><code>&lt;17.0.6的Java&gt; -XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Dfml.ignoreInvalidMinecraftCertificates=True -Dfml.ignorePatchDiscrepancies=True -Dlog4j2.formatMsgNoLookups=true -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump -Dos.name=Windows 10" -Dos.version=10.0 -Djava.library.path=${natives_directory} -Dminecraft.launcher.brand=${launcher_name} -Dminecraft.launcher.version=${launcher_version} -cp ${classpath} --username ${auth_player_name} --version ${version_name} --gameDir ${game_directory} --assetsDir ${assets_root} --assetIndex ${assets_index_name} --uuid ${auth_uuid} --accessToken ${auth_access_token} --clientId ${clientid} --xuid ${auth_xuid} --userType ${user_type} --versionType ${version_type}
+</code></pre>
+<p>哝，总的启动参数也就只有这么一点点，我们只是查找了其中的cp后面的classpath键值与替换了inheritsFrom键后面的东西吧！</p>
+<p><font color=blue>如果大家觉得翻页太麻烦的话，可以将其复制到记事本里面，然后再观看哦！</font></p>
+<p>好了，下面我们就来介绍一下如何使用上期所指认的所有方法吧！</p>
+<p>首先，我们双击窗体按钮，进入Button1Click事件，这个事件的意思代表着按钮1的点击事件，然后我们就需要在里面写东西了</p>
+<p>我们需要查看该版本是否是forge、fabric、quilt等模组加载器的版本，我们就需要判断其是否有inheritsFrom键。</p>
+<p>开始写代码：
+首先，在单元文件的implementation的上方，加上这样一句话：</p>
+<pre><code class="language-pascal">var
+  Form1: TForm1;
+  lch: Launcher;
+</code></pre>
+<p>这样，我们就可以直接通过lch来调用Launcher中的所有内置代码了！</p>
+<pre><code class="language-pascal">procedure TForm1.Button1Click(Sender: string);
+begin //还是如此，我这里用双右划线代替。大家在使用Delphi实际操作时，必须用单右划线。
+  var spath := Concat(MinecraftPath, '\\versions\\', ComboBox1.Items[ComboBox1.ItemIndex]);
+  //上述代码是获取当前你从下拉框中选择的版本文件夹。众所周知，在下面的所有用到的方法中，我们都使用了lch去获取类里面的函数。
+  var yjson := GetOutsideDocument(lch.GetRealPath(spath, '.json')); //获取当前文件夹下的json文件内容。
+  var gjson := GetOutsideDocument(lch.GetRealPath(lch.GetInheritsFrom(spath, 'inheritsFrom'), '.json')); //获取是否含有inheritsFrom键文件内容。
+  var rjson := lch.ReplaceInheritsFrom(yjson, gjson); //当然，如果你觉得换成三行太麻烦了，你完全可以将上面两个变量直接填在这里面，但是我不太建议这么做。
+  //由于在前期工作我们已经做得相当完善了，因此，我们只需要用这么几个函数，即可将最正确的json文件给加载到内存之中给我们调用了。
+  var root := TJsonObject.ParseJSONValue(rjson) as TJsonObject; //将上述获取好的json转换成json对象形式。
+  var res := lch.SelectParam(root); //成功获取到拼接完成后的json文件。
+  //在这里，我们需要开始判断所有需要替换的字符串模板有哪些，其中包括了Vanilla、Forge、Fabric、Quilt的版本。
+  res := Concat(res, ' --width ', wt, ' --height ', ht); //新增最后两个参数，分别代表了长宽高。这里我一般会输入1000和800。
+  res := res //开始进行字符串替换。
+  .Replace('${auth_player_name}', UserName) //这里开始判断的是玩家名称【由于目前我们做的只有离线登录，正版登录的玩家名称后期再说了。】
+  .Replace('${version_name}', root.GetValue('id').Value) //这里开始判断的事玩家版本【其实随便填什么都可以啦！但是这里以json中的id值作为判断依据。】
+  .Replace('${game_directory}', Concat('"', MinecraftPath, '"')) //重点！敲黑板！此处应该填入的是一个路径，用于判断版本隔离的，
+  //大家可能会发现，BakaXL的该键值，总是指向&lt;source&gt;\versions\&lt;versionname&gt;下的目录。而PCL2，则会让各位选择版本隔离。【这点我们以后说，大家只需要做个了解即可。】
+  .Replace('${assets_root}', Concat('"', MinecraftPath, '\\assets', '"')) //assets_root一般指的是MC启动所需要的assets路径。这里依旧使用了两个右划号。
+  .Replace('${assets_index_name}', Root.GetValue('assets').Value) //其实，这里可以使用assetIndex-&gt;id代替的，也可以直接用assets。这个键值是原版就有的。然后assetIndex这个键后期我们说道下载的时候再介绍。
+  .Replace('${auth_uuid}', '0123456789abcdef0123456789abcdef') //这里需要填入一个无符号的32位uuid键作为玩家的唯一标识符。大家可以用Delphi内置函数随机生成一个UUID，但是这里建议每次进入游戏的UUID键值必须一致，否则可能会导致物品栏内的物品失踪的bug。
+  .Replace('${auth_access_token}', 'none') //这里填入你的access_token，想必大家应该看到过MCBBS的那个帖子了吧，这个作为玩家的正版登录令牌，在离线模式下无需此键【填入任何字符即可】，但是在正版登录中，你绝对不允许将带有access_token的启动参数发给对方。
+  .Replace('${user_type}', 'Legacy') //用户类型，一般如果是正版登录，则替换为Mojang、外置同理，如果是离线登录，则替换为Legacy。
+  .Replace('${version_type}', VersionType) //填入版本类型，一般是显示在游戏启动后的左下角以及游戏内按下F3后左上角显示的。
+  .Replace('${natives_directory}', Concat('"', lch.GetRealDirectory(spath, 'natives'), '"')) //这个路径填入Minecraft本地库路径，不过照常来说，官启的本地库路径一般在&lt;C:\Users\&lt;用户名&gt;\AppData\Local\Temp&gt;中，
+  //而HMCL、PCL、BakaXL所存放的本地库路径，则在&lt;MC路径&gt;\versions\&lt;versionName&gt;中。因此，我们需要适配这种情况。这里使用了一个自定义函数GetRealDirectory，我们稍后说。
+  .Replace('${launcher_name}', 'CourseLauncher') //定义你的启动器名称【暂不知其用途】
+  .Replace('${launcher_version}', '1.0') //定义你的启动器版本【暂不知其用途】
+  .Replace('${classpath}', Concat('"', lch.GetCPLibraries(root, MinecraftPath, spath), '"')) //使用GetCPLibraries键替换掉classpath键。
+  .Replace('${library_directory}', Concat('"', MinecraftPath, '\libraries', '"')) //这里可以直接填入libraries的路径。
+  .Replace('${classpath_separator}', ';')//这里是每个classpath的分开符号。
+  .Replace('${authlib_injector_param}', ''); //这里需要将Authlib-Injector暂时去掉，这个还是老样子，我们后期再说！ 
+  //替换到这种程度就可以了。
+end;
+</code></pre>
+<p>最后，我们在上面写了一个GetRealDirectory的函数，这个函数我们也要去实现一下哦！</p>
+<pre><code class="language-cs">function Launcher.GetRealDirectory(path, suffix: string): String;
+var // 同上
+  Dirs: TArray&lt;String&gt;;
+begin
+  result := '';
+  if DirectoryExists(path) then // 判断文件夹是否存在
+  begin
+    Dirs := TDirectory.GetDirectories(path); // 获取文件
+    for var I in Dirs do begin // 循环判断
+      if I.IndexOf(suffix) &lt;&gt; -1 then begin// 判断是否在里面
+        result := I;
+        exit;
+      end;
+    end;
+  end;
+end;
+</code></pre>
+<p>然后，我们就敲完所有的代码了！</p>
+<p><font color=red>我们可以在最后一个Replace的后面，建立一个messagebox用来查看我们的参数是否拼接正确哦</font>，记住，我们所有的参数都只能在一行中实现，不允许出现分段或者多行哦！</p>
+<p>我们在最后一步，在Replace完了之后，我们只需要再添加一个函数，用于启动我们的MC即可！</p>
+<pre><code class="language-cs">  ShellExecute(Application.Handle, 'open', pchar(JavaPath), pchar(res), nil, SW_SHOWNORMAL);
+  //记住，这里的中间两个参数为pchar类型，意味着这是一个char指针类型。
+</code></pre>
+<p>只需要简简单单的一行，我们即可通过我们定义的Java启动MC了！这是一个Delphi的内置函数，用于执行cmd命令时用的。在这里面，我们也是首次使用到了我们的JavaPath哦！在使用这个函数的时候，我们需要引用一个单元文件：</p>
+<pre><code class="language-cs">uses
+  ShellAPI;
+</code></pre>
+<p>关于这个函数的使用教程，请参见：<a href="https://blog.csdn.net/yanjiaye520/article/details/6543165">网址</a></p>
+<p>具体功能见下：</p>
+<div class="table-wrapper"><table><thead><tr><th>参数</th><th>功能</th></tr></thead><tbody>
+<tr><td>1</td><td>默认均为Application.Handle</td></tr>
+<tr><td>2</td><td>执行外部程序时填入open，打开网址时填入nil</td></tr>
+<tr><td>3</td><td>外部程序入口，如果是网址则填入网址</td></tr>
+<tr><td>4</td><td>程序参数，如果没有可以填nil</td></tr>
+<tr><td>5</td><td>默认文件夹，直接填nil</td></tr>
+<tr><td>6</td><td>显示方式，这里只需了解两个，1.SW_SHOWNORMAL，正常显示，2.SW_HIDE，隐藏窗口显示。</td></tr>
+</tbody></table>
+</div>
+<p>好了，接下来，我们便可以正常的启动我们的MC了！你应该能看到，【假设你的MC已经被别的启动器下载并且被启动过至少一次。】【同样的，不仅如此，我们甚至还早已可以启动1.12.2以下以及远古版本了！】</p>
+<p>我们造的轮子可真多，难道不是么？</p>
+<p>哦，对了，此时此刻，你需要对你的MC版本进行Java版本判断，例如1.12.2的Forge只能使用java8启动、1.17以上版本只能使用Java17启动等。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../FirstChapter/LaunchGame/LaunchIntro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../FirstChapter/LaunchGame/UnzipNative.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../FirstChapter/LaunchGame/LaunchIntro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../FirstChapter/LaunchGame/UnzipNative.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,714 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>微软登录 - Let us Make A Minecraft Launcher</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">导论</a></li><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../ProgrammingLanguage.html"><strong aria-hidden="true">1.</strong> 编程语言的选择</a></li><li class="chapter-item expanded "><a href="../LaunchPrinciple.html"><strong aria-hidden="true">2.</strong> 启动原理</a></li><li class="chapter-item expanded "><a href="../FirstChapter/intro.html"><strong aria-hidden="true">3.</strong> 第一章：启动游戏</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../FirstChapter/LaunchArguments.html"><strong aria-hidden="true">3.1.</strong> 讲解启动参数</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetVersionFolder.html"><strong aria-hidden="true">3.2.</strong> 如何获取versions文件夹</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetJVMAndArgument.html"><strong aria-hidden="true">3.3.</strong> 如何获取jvm、game参数</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetCpLibraries.html"><strong aria-hidden="true">3.4.</strong> 如何获取cp-library值</a></li><li class="chapter-item expanded "><a href="../FirstChapter/SupportInheritsFrom.html"><strong aria-hidden="true">3.5.</strong> 支持inheritsFrom下的MC</a></li><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/LaunchIntro.html"><strong aria-hidden="true">3.6.</strong> 启动游戏！</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/ReplaceTemplate.html"><strong aria-hidden="true">3.6.1.</strong> 替换字符串模板并启动游戏</a></li><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/UnzipNative.html"><strong aria-hidden="true">3.6.2.</strong> 解压Natives文件</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../SecondChapter/Intro.html"><strong aria-hidden="true">4.</strong> 第二章：账号部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../SecondChapter/OfflineLogin.html"><strong aria-hidden="true">4.1.</strong> 离线登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/MicrosoftLogin.html" class="active"><strong aria-hidden="true">4.2.</strong> 微软登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/OAuthLogin.html"><strong aria-hidden="true">4.3.</strong> 微软OAuth登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/AuthlibInjectorLogin.html"><strong aria-hidden="true">4.4.</strong> Authlib-Injector第三方登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/RefreshLogin.html"><strong aria-hidden="true">4.5.</strong> 刷新账号</a></li><li class="chapter-item expanded "><a href="../SecondChapter/OfflineSkin.html"><strong aria-hidden="true">4.6.</strong> 离线登录皮肤</a></li></ol></li><li class="chapter-item expanded "><a href="../ThirdChapter/Intro.html"><strong aria-hidden="true">5.</strong> 第三章：下载部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ThirdChapter/GetMCData.html"><strong aria-hidden="true">5.1.</strong> 获取MC元数据</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/DownloadLibraries.html"><strong aria-hidden="true">5.2.</strong> 下载libraries</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/DownloadAssets.html"><strong aria-hidden="true">5.3.</strong> 下载assets</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/SupportThread.html"><strong aria-hidden="true">5.4.</strong> 支持多线程下载</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/LaunchDownloadMC.html"><strong aria-hidden="true">5.5.</strong> 启动自己下载过后的MC</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/Intro.html"><strong aria-hidden="true">5.6.</strong> 模组加载器</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/SupportFabricQuilt.html"><strong aria-hidden="true">5.6.1.</strong> 支持Fabric、Quilt自动安装</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/SupportNeoForge.html"><strong aria-hidden="true">5.6.2.</strong> 支持NeoForge自动安装</a></li></ol></li><li class="chapter-item expanded "><a href="../ThirdChapter/CompleteMissingFiles.html"><strong aria-hidden="true">5.7.</strong> 补全MC的缺失文件</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/CheckFileHash.html"><strong aria-hidden="true">5.8.</strong> 校验文件的hash值</a></li></ol></li><li class="chapter-item expanded "><a href="../TutorWriteTime.html"><strong aria-hidden="true">6.</strong> 教程书写时间</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Let us Make A Minecraft Launcher</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="本章教大家如何使用微软登录"><a class="header" href="#本章教大家如何使用微软登录">本章教大家如何使用微软登录</a></h1>
+<h3 id="切记本章使用的是浏览器回显登录如果你的启动器不愿意支持这个请转到下一章oauth登录"><a class="header" href="#切记本章使用的是浏览器回显登录如果你的启动器不愿意支持这个请转到下一章oauth登录">切记，本章使用的是浏览器回显登录，如果你的启动器不愿意支持这个，请转到下一章OAuth登录。</a></h3>
+<p>首先哈，正如文章标题，本章使用的是浏览器回显登录。那么什么是浏览器回显呢？</p>
+<p>首先，让我们看看Minecraft官方Wiki上是怎么说的吧：<a href="https://zh.minecraft.wiki/w/%E6%95%99%E7%A8%8B/%E7%BC%96%E5%86%99%E5%90%AF%E5%8A%A8%E5%99%A8#Microsoft_%E8%B4%A6%E6%88%B7">点我</a></p>
+<p>首先，Minecraft的客户端ID被硬编码为00000000402b5328，这是众所周知的。我们可以在浏览器中访问下面那一串HTTP。紧接着，也许会弹出一个让你登录Minecraft的登录窗口，也许不会弹。</p>
+<p>那么，有些时候会弹出一个登录窗口是怎么回事呢？此时可能是因为你使用的Windows浏览器不是Edge，并且从未登录过任一微软账号的原因。如果没有弹出登录窗口，而是直接改变了网址栏，变成了<font color=blue>【https://login.live.com/oauth20_desktop.srf?code=&lt;登录代码&gt; 】</font>类似于这样的网址。那多半是你的浏览器已经保存了你有关Minecraft微软登录的Cookie，请删掉该浏览器中的所有Cookie后再使用。</p>
+<p>好了，然后我再来给大家介绍一下在程序中使用WebBrowsers进行登录而不是使用外置浏览器进行登录的方式：其实此时与外置浏览器登录没有任何区别，只是我们使用的是IE内核的浏览器，与Chromium内核的浏览器的Cookie保存位置不一样，因此即使我们在程序中删掉有关登录信息的任何Cookie也不会有任何问题。</p>
+<p>我们所需要实现的目的是：在程序中或者在外置浏览器中，登录网址后对其返回的所有Json进行解析，最终得到Minecraft的登录令牌。</p>
+<p>这里切记几点问题：
+<font color=red></p>
+<ol>
+<li>由于Minecraft的登录令牌时限为24个小时，因此，在这24个小时内，你不能将你的accessToken暴露给你不熟悉的任何一个人。</li>
+<li>Minecraft的刷新令牌实现为一个月，因此，在这一个月内，你不能将你的refreshToken暴露给你不熟悉的任何一个人。</li>
+<li>微软账号的安全性，你不可以将你的微软账号以及密码暴露给你不熟悉的任何一个人。</li>
+<li>由于很多启动器在导出启动参数之时，误将AccessToken给保存到本地目录下，因此，你不可以将AccessToken以明文的形式保存在本地。【这里的明文不仅限于使用Base64加密后的Token。】，否则在MCBBS上很难审核通过。
+</font></li>
+</ol>
+<p>我们可以来看看，使用登录网址所返回的代码有哪些：</p>
+<p>首先是这个：【https://login.live.com/oauth20_desktop.srf?code=************】</p>
+<p>我们需要做的，就是将这串返回网址code=后面的所有字符给提取出来。然后对此进行解析，最终获得Minecraft登录令牌了！</p>
+<p>还是老样子，先来拽窗口控件吧，像我这样修改你的窗口：</p>
+<p><img src="./image/MicrosoftForm.png" alt="微软登录窗体样式" /></p>
+<p>由于目前我们暂时未学OAuth登录，因此这种方式将暂时搁置一下。</p>
+<p>我们双击浏览器登录，然后在浏览器登录的按钮点击事件里，写上这么一串字：</p>
+<pre><code class="language-cs">procedure TForm2.Button7Click(Sender: TObject);
+begin
+  ShellExecute(Application.Handle, nil, pchar(Concat('https://login.live.com/oauth20_authorize.srf',
+                                                     '?client_id=00000000402b5328',
+                                                     '&amp;response_type=code',
+                                                     '&amp;scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL',
+                                                     '&amp;redirect_uri=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf')), nil, nil, SW_SHOWNORMAL);
+end;
+</code></pre>
+<p>是的，没错！我们要做的就是调用一个执行cmd指令的程序：ShellExecute，如果你的编程语言里有直接调用系统默认浏览器打开网址的函数，你当然也可以使用哦！</p>
+<p>然后，我们会获得一个回调链接，让玩家将回调链接输入进我们的输入框中，然后点击微软登录的单选框，最后，我们只需要点击一次添加按钮即可开始添加我们的微软账号了！</p>
+<p>要添加微软账号，首先在我们的添加账号按钮点击事件里面，写上这样几行代码：</p>
+<pre><code class="language-cs">procedure TForm2.Button2Click(Sender: TObject);
+begin
+  if RadioButton1.Checked then begin
+    ... //上期离线登录的代码
+  end else if RadioButton2.Checked then begin
+    if messagebox(Handle, '你选择的是微软正版登录，登录过程可能会卡挺久，需要有耐心！有可能会失败，是否要继续呢？。', '有点久提醒', MB_YESNO+MB_ICONINFORMATION) = 7 then exit; //弹出信息框提示玩家是否使用微软登录，如果选否，则退出。
+    var ed: String := Edit3.Text; //将Edit3的输入框转换成String类型的。Edit3就是回调链接的那个框。
+    //下面开始判断，如果回调连接里面出现了&amp;lc=，即证明回调链接输入正确。
+    if ed.IndexOf('&amp;lc=') &lt;&gt; -1 then begin
+      //然后此处开始将code后面的字符串切开。
+      if ed.IndexOf('code=') &lt;&gt; -1 then begin
+        ed := ed.Substring(ed.IndexOf('code=') + 5, ed.Length); 
+      end; //判断回调链接是否合理，共计后面所有的字符都属于需要用到的。
+      var cpro: TProc := procedure begin //定义一个线程【这里用到了TTask，这个是我们还没学到的，不过我们也即将要学习了！】
+        try
+          accm := Account.InitializeAccount(ed, 'post'); //给初始化方法设定一个post值，此处使用了自定义类中的构造函数。
+          at := accm.GetAccessToken; //获取AccessToken登录秘钥
+          if at = 'noneaccount' then exit; //如果at没有账号，则为返回方法。
+          rt := accm.GetRefreshToken;  //获取RefreshToken刷新秘钥
+          un := accm.GetUserName;   //获取玩家名字
+          ud := accm.GetUUID;       //获取UUID
+        except  //读取不出则抛出报错。然后执行。这里为网络连接超时所产生的报错。
+          messagebox(Handle, pchar(Concat('你的网络连接超时了，请连接之后再进行网络请求。或者如果你连接了，重试一次即可。')), '连接超时引发的报错', MB_ICONERROR);
+          exit; //弹出信息框后退出方法。
+        end; //将所有目标添加到配置文件。
+        //这里需要配置5个值。type、name、uuid、accessToken、refreshToken，
+        //当然，如果你想的话，你可以为accessToken和refreshToken进行加密处理。
+        (AccountJson.GetValue('account') as TJsonArray).Add(TJsonObject.Create
+          .AddPair('type', 'microsoft')
+          .AddPair('name', un)
+          .AddPair('uuid', ud)
+          .AddPair('access_token', at)
+          .AddPair('refresh_token', rt)
+        );
+        ComboBox1.ItemIndex := ComboBox1.Items.Add(Concat(un, '（微软）')); //为下拉框新建一个元素，为【用户名+（微软）】图示。
+        Edit3.Text := ''; //给回调链接输入框重新设为空。
+        messagebox(Handle, '添加成功！', '添加成功', MB_OK+MB_ICONINFORMATION);
+      end; //添加成功！
+      TTask.Run(cpro); //使用TTask执行上述过程。
+    end else messagebox(Handle, '你的回调链接输入错误了，请重试', '回调链接错误', MB_OK+MB_ICONERROR); //如果回调链接不满足规范，则弹出信息框。
+  end;
+end;
+</code></pre>
+<p>上述部分，我们用到了TTask，那么什么是TTask呢？众所周知，C#中有一个Task类，这个与C#那个其实差不多，都是新生成一个线程执行里面的函数罢了！在此之前，我们需要引用一个类：</p>
+<pre><code class="language-cs">uses
+  Threading;
+</code></pre>
+<p>引用上述Threading类即可！</p>
+<p>其中，我们需要接触到新类的概念了。什么是新类？新类就是在type中声明一个别的类，不在原本的类里面的，就叫新类【类比于Java语言，新定义一个public static class的一致。】</p>
+<p>看了上面的代码，大家可能会对我们添加账号看得比较懂了吧。</p>
+<p>但是，我们要新建的类，可不是public static class哦！而是在外部定义一个class。就相当于Java中的以下代码：</p>
+<pre><code class="language-java">public class Hello{
+    public static void main(String[] args){
+        Hello2 hello = new Hello2();
+        hello.cateat();
+    }
+}
+class Hello2{
+    public void cateat(){
+        System.out.println("The Cat Like Eat Fish!!");
+    }
+}
+</code></pre>
+<p>上述代码会输出一个The Cat Like Eat Fish!!，我们要声明的类，就在Hello2这一部分啦！</p>
+<p>我们首先往上翻，找到type TForm2这个类，然后像我这么写：</p>
+<pre><code class="language-cs">type
+  TForm2 = class(TForm) //这里的括号内，表示继承。
+  //如果继承的是个类，则只能填一个，反之，interface接口可以填入多个哦！
+    ...//Some Control
+  end;
+  Account = class //此处定义一个新类。不用多写一个type了。
+  private
+    un, at, uu, rt: String;
+    tun, tat, tuu, tct, tbs: String;
+  public
+    constructor InitializeAccount(key, rr: String); overload; //构造函数
+    // constructor InitializeAccount(sn, un, pwd, ct, id, rr: String); overload; 
+    // constructor InitializeOAuth(key, token, rr: String); overload; 
+    function GetAccessToken: String;
+    function GetRefreshToken: String;
+    function GetUserName: String;
+    function GetUUID: String;
+    // function GetThirdAccessToken: String;
+    // function GetThirdClientToken: String;
+    // function GetThirdUserName: String;
+    // function GetThirdUUID: String;
+    // function GetThirdBaseCode: string;
+    class function GetHttpf(key, web: String): String;
+    class function GetHttpy(key, web: String): String;
+    class function GetHttph(key, web: String): String;
+  end;
+</code></pre>
+<p>我们定义和上面一样多的函数就可以了！</p>
+<p>此时，我们可以看到，怎么会这么多函数呢？虽然有些被注释了哈。。</p>
+<p>原因很简单，我只是把下一章才教的外置登录和下下一章教到的微软OAuth登录提前将方法定义好了。如果我们去掉下两章的代码，则就是将上方注释的样子。如果去掉注释，则就是下两章说道的内容了！</p>
+<p>oh，我发现了一个新的问题，大家应该还没见过constructor这个关键字吧，其实这个关键字是构造函数的意思，也就是类似于java中如下的写法：</p>
+<pre><code class="language-java">public class Hello{
+    private final int i;
+    private Hello(int i){
+        this.i = i;
+    }
+    public static void main(String[] args){
+        Hello hel = new Hello(10);
+        System.out.println(hel.i);
+    }
+}
+</code></pre>
+<p>这么写，上面的private Hello就相当于Delphi中的constructor了！但只不过我们在Java中的写法是private的，而在Delphi里面的写法是public下面的啦！</p>
+<p>而且，我们这里不仅声明了一个相同名称的构造函数，这里给大家普及一个知识点，<font color=blue>在Delphi中，我们使用构造函数或者别的方法时，如果使用到同一个函数名，但是参数不一样。直接写会报错，此时，我们应该在该函数的末尾声明为overload即可。</font>，这个的意思是多态。</p>
+<p>还有一个是关于继承的，<font color=blue>在Java或者Kotlin中，我们都有override关键字，或者是它的注解，用于声明这个方法是继承得来的方法，而Delphi中也有override关键字，我们只需要在继承的方法后面写上override就可以了！</font></p>
+<p>因此，就是这么简单了！</p>
+<p>然后，我们还要来说说看静态方法，在Delphi中，是不存在static关键字的，但是我们可以用另一种方式来声明一个静态方法，就是在方法前面加上一个class关键字，这样，我们就可以直接通过【类名.方法名】来获取到这个方法了。</p>
+<p>好了，接着说，我们先把下面的GetHTTPf、GetHTTPy、GetHTTPh写好之后，我们再去写构造函数啦。</p>
+<p>首先，键入以下代码：</p>
+<pre><code class="language-cs">implementation //在implementation下方写。
+
+class function Account.GetHTTPf(key: string; web: string): string;
+begin
+  var ss := TStringStream.Create('', TEncoding.UTF8, False); //首先定义一个流。用于为Post写入请求头。
+  var http := TNetHTTPClient.Create(nil); //定义一个TNetHTTPClient，用于进行网络Get、Post指令。
+  try
+    ss.WriteString(key); //写入流
+    ss.Position := 0; //让流的位置返回0
+    with http do begin //with关键字是可以无需使用http.某个函数，直接使用就好。
+      AcceptCharSet := 'utf-8'; //设置网络请求编码，默认都是utf-8
+      AcceptEncoding := '65001'; //设置编码代号，此为默认编码
+      AcceptLanguage := 'en-US'; //设置网络请求语言，此为英文。
+      ResponseTimeout := 200000; //设置请求时长
+      ConnectionTimeout := 200000; //设置连接时长
+      SendTimeout := 200000; //设置发送时长【完美的英文理解】，以下为设置请求协议。
+      SecureProtocols := [THTTPSecureProtocol.SSL3, THTTPSecureProtocol.TLS12, THTTPSecureProtocol.TLS13]; //请求协议，这里调用了SSL3、TLS12和TLS13。
+      HandleRedirects := True;  //可以网址重定向，也就是说假如Post、Get的网址有重定向，这样也可以获取到。
+      ContentType := 'application/x-www-form-urlencoded;charset=utf-8'; //设置请求类型，这里是x-www-form-urlencoded。
+      var res := Post(web, ss); //现在开始Post请求。将写入的头定义的流填入。
+      result := res.ContentAsString; //返回网址的请求值，将其转换成String类型。
+    end;
+  finally
+    http.Free; //释放资源
+    ss.Free; //释放资源
+  end;
+end;
+class function Account.GetHTTPy(key, web: String): String;
+begin
+  var ss := TStringStream.Create('', TEncoding.UTF8, False);
+  var http := TNetHTTPClient.Create(nil);
+  try
+    ss.WriteString(key); //该方法与上面的一致
+    ss.Position := 0;
+    with http do begin
+      AcceptCharSet := 'utf-8';
+      AcceptEncoding := '65001';
+      AcceptLanguage := 'en-US';
+      ResponseTimeout := 200000;
+      ConnectionTimeout := 200000;
+      SendTimeout := 200000;
+      SecureProtocols := [THTTPSecureProtocol.SSL3, THTTPSecureProtocol.TLS12, THTTPSecureProtocol.TLS13];
+      HandleRedirects := True;
+      ContentType := 'application/json;charset=utf-8'; //唯独这里不一样，这里使用了json作为请求头类型。
+      Accept := 'application/json'; //这里将Accept类型也换成json，只是少了charset=utf-8的。
+      var res := Post(web, ss); //然后依旧是一致的哦！
+      result := res.ContentAsString;
+    end;
+  finally
+    http.Free;
+    ss.Free;
+  end;
+end;
+class function Account.GetHTTPh(key, web: String): String;
+begin
+  var ss := TStringStream.Create('', TEncoding.UTF8, False);
+  var http := TNetHTTPClient.Create(nil);
+  try
+    with http do begin //这里的h方法，是Get的方法，与上面有些许不一致。
+      AcceptCharSet := 'utf-8'; //这里没有将key写入流，因为此时，这个流是用于接收Get请求的返回值的。
+      AcceptEncoding := '65001';
+      AcceptLanguage := 'en-US';
+      ResponseTimeout := 200000;
+      ConnectionTimeout := 200000;
+      SendTimeout := 200000;
+      SecureProtocols := [THTTPSecureProtocol.SSL3, THTTPSecureProtocol.TLS12, THTTPSecureProtocol.TLS13];
+      HandleRedirects := True; //此处与上面的均一致。
+      CustomHeaders['Authorization'] := Concat('Bearer ', key); //这里使用自定义头，使用了Authorization作为键，然后Bearer key作为请求的密钥。
+      Get(web, ss); //这里对web进行get请求，然后将一个已经初始化的空流当作第二个参数填入进去。此处不需要使用一个变量接收Get值。
+      result := ss.DataString; //返回流的字符串数据。
+    end;
+  finally
+    http.Free;
+    ss.Free;
+  end;
+end;
+</code></pre>
+<p>好了，注释都写好了！我们需要注意的是，在Delphi中，对于Get、Post的请求均不一致，如Post请求需要提前在第二个参数里写上key值，而Get请求，则是直接在CustomHeaders里面，写上键，和值即可。</p>
+<p>然后，我们需要注意的是：在别的语言中，可能并没有Delphi这么详细的设置，如设置AcceptEncoding := '65501'、AcceptCharSet := 'utf-8'等的设置，大多数语言都会有一个默认值。大家当然也可以完全按照所需要的语言教程中的HTTP请求的默认值来写哦！</p>
+<p>然后嘛，将这一串代码复制进Delphi中，可能会发生大报错。原因是我们还没有引用任何一个头文件。这个TNetHTTPClient是需要引用好几个头文件才能够正常使用的。</p>
+<p>我们需要引用下方几个头【如果你所编写的语言需要import什么类，你就照常引用就好了】</p>
+<pre><code class="language-cs">uses
+  System.Net.URLClient, System.Net.HttpClient, System.Net.HttpClientComponent;
+</code></pre>
+<p>我们需要引用整整三个头文件，是的，TNetHTTPClient就是这样！</p>
+<p>当然，如果你想自己找头文件引用的话，你可以进入窗口视图，在右下角的Palette中，搜索TNetHTTPClient，然后将其中的某个控件拖到窗体上，再进入一次代码视图，然后再回到窗体视图，右键TNetHTTPClient删掉这个控件即可。</p>
+<p>自然，照我上面一说，大家肯定认为这个TNetHTTPClient是一个控件。那为什么我们不在Delphi里面直接拖入一个TNetHTTPClient控件，而非要在程序中自己Create一个呢？原因很简单，<font color=red>拖入的控件无法free资源</font>，<font color=blue>因为一旦free后，其他时候再想调用就会很麻烦，而且无法做到每个函数执行完一次后直接free资源，从而达到内存不会泄漏，同时内存可以及时的释放资源。</font>综上所述，我们需要在程序里自己Create一个TNetHTTPClient控件。</p>
+<p>然后嘛，自然就是我们的</p>
+<pre><code class="language-cs">function GetAccessToken: String;
+function GetRefreshToken: String;
+function GetUserName: String;
+function GetUUID: String;
+</code></pre>
+<p>这几个函数啦。这几个函数尤为简单，我们为什么会这么写呢？原因不得而知，我们有几个全局变量是private类型的，因此我们需要写上这么几个函数啦！</p>
+<p>然后，还有，我不是很清楚Java里面的private函数作用域是在本文件里到处可以使用，还是在本类中到处可以使用。我只知道Delphi里面，private内的变量或函数的作用域是在本单元文件中的到处都可以使用，无关于类。</p>
+<p>但是，我们还是要写上这么四个函数【后期做第三方Authlib登录的时候也需要】，因为后面我们的启动游戏过程中，会启动过程中调用一次微软的验证服务器来验证我们的accessToken是否合法。</p>
+<p>我们直接开始写吧：</p>
+<pre><code class="language-cs">function Account.GetAccessToken: string;
+begin
+  result := at;
+end;
+function Account.GetRefreshToken: string;
+begin
+  result := rt;
+end;
+function Account.GetUserName: string;
+begin
+  result := un;
+end;
+function Account.GetUUID: string;
+begin
+  result := uu;
+end;
+</code></pre>
+<p>那么，这里就是我们的函数了！是不是很简单呢？自然，我们也可以对其进行判空，例如判断at、rt、un、uu全局变量是否为空，如果为空，则raise一个Exception，都是可以的！</p>
+<p>这几个变量我在之前已经说过了哦！大家可以回去看看我的Account这个类里面的private代码块下面的全局变量哦！</p>
+<p>好了好了，接下来才是重头戏，我们需要写微软登录的构造函数InitializeAccount了！这个的中文意思是初始化账号哦！</p>
+<pre><code class="language-cs">
+//初始化微软登录
+constructor Account.InitializeAccount(key, rr: String); //构造函数实现
+const  //设置4个请求网址
+  micro = 'https://login.live.com/oauth20_token.srf';
+  xbox = 'https://user.auth.xboxlive.com/user/authenticate';
+  xsts = 'https://xsts.auth.xboxlive.com/xsts/authorize';
+  mccc = 'https://api.minecraftservices.com/authentication/login_with_xbox';
+  ishas = 'https://api.minecraftservices.com/minecraft/profile';
+begin
+  var k1: String;
+  if rr = 'refresh' then
+    k1 := Concat('client_id=00000000402b5328',
+      '&amp;refresh_token=', key,
+      '&amp;grant_type=refresh_token',
+      '&amp;redirect_uri=https://login.live.com/oauth20_desktop.srf',
+      '&amp;scope=service::user.auth.xboxlive.com::MBI_SSL')
+  else
+    k1 := Concat('client_id=00000000402b5328',
+      '&amp;code=', key,
+      '&amp;grant_type=authorization_code',
+      '&amp;redirect_uri=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf',
+      '&amp;scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL');
+    //这里是请求microsoft的。
+  Form3.Label8.Caption := '正在请求microsoft中……';
+  var t1 := Account.GetHttpf(k1, micro);  //传值进方法并将返回值设置。
+  var j1 := TJsonObject.ParseJSONValue(t1) as TJsonObject; //设置json解析
+  var w1 := j1.GetValue('access_token').Value; //获取assets_token，下面继续设置请求参数。
+  //这里是请求xbox的
+  var k2 := Concat('{"Properties":{"AuthMethod":"RPS","SiteName":"user.auth.xboxlive.com","RpsTicket":"d=', w1, '"},"RelyingParty":"http://auth.xboxlive.com","TokenType":"JWT"}'); //设定xbox的请求头。
+  var t2 := Account.GetHttpy(k2, xbox);
+  var j2 := TJsonObject.ParseJSONValue(t2) as TJsonObject;
+  var w2 := j2.GetValue('Token').Value;
+  //这里将获取到uhs的值。
+  var r1 := j2.GetValue('DisplayClaims') as TJsonObject;
+  var ur := r1.GetValue('xui') as TJsonArray;
+  var uhs := ur[0].GetValue&lt;String&gt;('uhs');
+  //这里是请求xsts的。
+  var k3 := Concat('{"Properties":{"SandboxId":"RETAIL","UserTokens":["', w2, '"]},"RelyingParty":"rp://api.minecraftservices.com/","TokenType":"JWT"}');//设定xsts的请求头。
+  var t3 := Account.GetHttpy(k3, xsts);
+  var j3 := TJsonObject.ParseJSONValue(t3) as TJsonObject;
+  var w3 := j3.GetValue('Token').Value;
+  //这里将判断uhs是否一致【基本上都会一致的，没有存在不一致的情况。。。】
+  var rr1 := j3.GetValue('DisplayClaims') as TJsonObject; //对uhs进行json解析。
+  var uur := rr1.GetValue('xui') as TJsonArray;
+  var uhhs := uur[0].GetValue&lt;String&gt;('uhs');
+  if uhhs &lt;&gt; uhs then raise Exception.Create('Microsoft uhs is not equal');
+  //这一步是请求mc的。
+  var k4 := Concat('{"identityToken":"XBL3.0 x=', uhs, ';', w3, '"}');
+  var t4 := Account.GetHttpy(k4, mccc);
+  var j4 := TJsonObject.ParseJSONValue(t4) as TJsonObject;
+  var w4 := j4.GetValue('access_token').Value; //获取到accesstoken。
+  //PS：直到这一步，我们才正式的获取到accessToken。很复杂，但也很耐人寻味。
+  //获取是否为购买了mc的样子。
+  var t5 := Account.GetHttph(w4, ishas);
+  var j5 := TJsonObject.ParseJSONValue(t5) as TJsonObject; //将通过accessToken的json值，解析出来，并判断里面是否有以下键值。
+  try //判断里面是否有name、id值，如果有，则将rt、at一并赋值为refresh_token、access_token。
+    un := j5.GetValue('name').Value;
+    uu := j5.GetValue('id').Value;
+    rt := j1.GetValue('refresh_token').Value;
+    at := j4.GetValue('access_token').Value;
+  except //如果里面没有值，则抛出报错。
+    if messagebox(Form2.Handle, '不好意思，您的Microsoft账户并没有购买Minecraft，请问是否立即前往官网购买？', '暂未购买，是否前往商店', MB_YESNO+MB_ICONERROR) = 6 then //暂未购买。
+    begin //打开一个网址，请用户购买。
+      ShellExecute(Application.Handle, nil,
+        'https://www.minecraft.net/zh-hans/store/minecraft-java-edition',
+        nil, nil, SW_SHOWNORMAL)
+    end;
+    at := 'noneaccount';
+  end;
+end;
+</code></pre>
+<p>好了好了，这就是我们的构造函数了哦！</p>
+<p>至于为什么要这么写呢？我们来看看各个请求的返回json数据是怎么样的吧！</p>
+<p>首先是第一个：请求Microsoft的步骤！</p>
+<pre><code>POST https://login.live.com/oauth20_token.srf
+Content-Type: application/x-www-form-urlencoded
+
+&amp;code=key&amp;grant_type=authorization_code&amp;redirect_uri=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf&amp;scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL
+</code></pre>
+<p>其返回的数据是：</p>
+<div class="table-wrapper"><table><thead><tr><th>参数</th><th>描述</th></tr></thead><tbody>
+<tr><td>token_type</td><td>总是Bearer。</td></tr>
+<tr><td>expires_in</td><td>有效时间：以秒为单位，这里是24小时。</td></tr>
+<tr><td>scope</td><td>请求数据，这里请求的是xbox.com。</td></tr>
+<tr><td>access_token</td><td>你的Access Token，但是这个无法用于启动游戏，这个是用来请求下一步操作的。保存它。</td></tr>
+<tr><td>refresh_token</td><td>你的Refresh Token，这个可以用来重置账号。</td></tr>
+<tr><td>user_id</td><td>你登录时用的账号id，每个用户只有一份。</td></tr>
+<tr><td>foci</td><td>暂不清楚用途，一直都是1。</td></tr>
+</tbody></table>
+</div>
+<p>如果你是刷新账号的话，只需要把以上的请求参数修改成refresh_token即可！</p>
+<p>下面我们再来看看请求xbox的吧，这里我们需要用到上一次的access_token。</p>
+<pre><code>POST https://user.auth.xboxlive.com/user/authenticate
+Content-Type: application/json
+Accept: application/json
+
+{
+  "Properties": {
+    "AuthMethod": "RPS",
+    "SiteName": "user.auth.xboxlive.com",
+    "RpsTicket": "d=&lt;access_token&gt;" 
+  },
+  "RelyingParty": "http://auth.xboxlive.com",
+  "TokenType": "JWT"
+}
+</code></pre>
+<p>其中，RpsTicket里面，我们在填入access_token的时候，我们需要在前面填入一个d=，这点必须。</p>
+<p>其返回的数据为：</p>
+<div class="table-wrapper"><table><thead><tr><th>参数</th><th>描述</th></tr></thead><tbody>
+<tr><td>IssueInstant</td><td>你的请求时间</td></tr>
+<tr><td>NotAfter</td><td>你的请求时间【与上者相同】</td></tr>
+<tr><td>Token</td><td>你的Xbox Access Token，保存它。</td></tr>
+<tr><td>DisplayClaims</td><td>请求显示要求，对于每个微软软件登录操作各不相同，例如我的世界地下城。</td></tr>
+<tr><td>xui</td><td>显示你的要求之一，这里用xui写。</td></tr>
+<tr><td>uhs</td><td>这里是你的uhs代码，保存它。</td></tr>
+</tbody></table>
+</div>
+<p>在这里，我们需要保存两个东西，第一个是uhs，第二个是Token。</p>
+<p>再来看看xsts的请求数据吧，这里用到我们上一步用到的Token值。</p>
+<pre><code>POST https://xsts.auth.xboxlive.com/xsts/authorize
+Content-Type: application/json
+Accept: application/json
+
+{
+  "Properties": {
+    "SandboxId": "RETAIL",
+    "UserTokens": [
+      "xbox_token"
+    ]
+  },
+  "RelyingParty": "rp://api.minecraftservices.com/",
+  "TokenType": "JWT"
+}
+</code></pre>
+<p>其返回的数据与上方的一致，并且uhs也是一致的，我们只需要保存内部的Token即可！</p>
+<p>下面我们就可以直接获取Minecraft的最终Access Token了！！我们的xsts获取的Token刚好可以用于验证我们的Minecraft。</p>
+<pre><code>POST https://api.minecraftservices.com/authentication/login_with_xbox
+Content-Type: application/json
+Accept: application/json
+
+{
+  "identityToken": "XBL3.0 x=&lt;uhs&gt;;&lt;xsts_token&gt;"
+}
+</code></pre>
+<p>这里的参数拼接可能有些奇怪，但也根本不影响我们书写！</p>
+<p>其返回的数据是：</p>
+<div class="table-wrapper"><table><thead><tr><th>参数</th><th>描述</th></tr></thead><tbody>
+<tr><td>username</td><td>用户的验证名称，这里并不是用户的最终UUID……</td></tr>
+<tr><td>roles</td><td>这里应该是空数组，不清楚用途，应该是用户属性之类的。</td></tr>
+<tr><td>access_token</td><td>你的老朋友，Access Token，该Token需要保存，后启动游戏。</td></tr>
+<tr><td>token_type</td><td>持有者，一直都是Bearer</td></tr>
+<tr><td>expires_in</td><td>有效期，这里是24小时，也就是一天。</td></tr>
+</tbody></table>
+</div>
+<p>现在我们需要验证用户的账号里是否购买了Minecraft，如果购买了，则获取它的用户名和UUID。</p>
+<p>我们看到wiki上写了一个获取mcstore的，但是着实想了想，根本没必要啊……我们可以直接获取用户数据，最后获得其uuid和名称，如果获取不到的话，就抛出报错，将错误展现给我们的用户即可！</p>
+<p>来看验证Minecraft有效性：</p>
+<pre><code>GET https://api.minecraftservices.com/minecraft/profile
+Header[Authorization]: Bearer &lt;your access token&gt;
+</code></pre>
+<p>上面的your access token写上你的登录用的AccessToken。然后前面填入的是Header哦！</p>
+<p>其返回的数据是：</p>
+<div class="table-wrapper"><table><thead><tr><th>参数</th><th>描述</th></tr></thead><tbody>
+<tr><td>id</td><td>你账号的真实UUID</td></tr>
+<tr><td>name</td><td>你账号的真实用户名</td></tr>
+<tr><td>skins</td><td>账号皮肤</td></tr>
+<tr><td>capes</td><td>账号披风</td></tr>
+</tbody></table>
+</div>
+<p>对于皮肤和披风的解析请自行参照官方结构，这里暂不赘述。</p>
+<p>如果用户未拥有Minecraft，则解析看起来如下：</p>
+<div class="table-wrapper"><table><thead><tr><th>参数</th><th>描述</th></tr></thead><tbody>
+<tr><td>path</td><td>用户请求错误的路径</td></tr>
+<tr><td>errorType</td><td>错误类型：这里应该是NOT_FOUND</td></tr>
+<tr><td>error</td><td>错误标志</td></tr>
+<tr><td>errorMessage</td><td>错误信息，这里会描述你为什么会遇到错误【英文】</td></tr>
+<tr><td>developerMessage</td><td>开发者信息</td></tr>
+</tbody></table>
+</div>
+<p>好了，那么我们的请求链接就写完了，大概就是这样的啦！各位可以看看啦！</p>
+<p>这么写完了以后，我们再次回到我们的按钮，我们惊讶的发现了，我们的按钮已经设置完毕了！那么，此时此刻，我们就可以回到我们的主窗口，点击我们的启动游戏按钮，然后键入以下代码：</p>
+<pre><code class="language-cs">
+procedure TForm1.Button1Click(Sender: TJsonObject);
+begin
+  ... //前面省略
+    if typetemp = 'offline' then begin //如果type键等于offline，则执行。
+      PlayerName := chooseAbout.GetValue('name').Value; //设置为name
+      PlayerUUID := chooseAbout.GetValue('uuid').Value; //设置为uuid
+      PlayerAcTo := PlayerUUID; //accessToken等于uuid
+      PlayerType := 'Legacy'; //type为Legacy。
+      PlayerAuth := ''; //为空
+    end //将末尾分号去掉。
+    else if typetemp = 'microsoft' then begin
+      PlayerName := chooseAbout.GetValue('name').Value; //设置为name
+      PlayerUUID := chooseAbout.GetValue('uuid').Value; //设置为uuid
+      PlayerAcTo := chooseAbout.GetValue('access_token').Value; //设置为accessToken
+      PlayerType := 'msa'; //type为msa。这样才能在多人联机中发言。
+      PlayerAuth := ''; //为空
+    end;
+  ... //后面省略
+end;
+</code></pre>
+<p>然后，此时此刻我们再尝试一下启动游戏！成功了！微软登录成功了！</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../SecondChapter/OfflineLogin.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../SecondChapter/OAuthLogin.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../SecondChapter/OfflineLogin.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../SecondChapter/OAuthLogin.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

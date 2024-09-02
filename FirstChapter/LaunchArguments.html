@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>讲解启动参数 - Let us Make A Minecraft Launcher</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">导论</a></li><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../ProgrammingLanguage.html"><strong aria-hidden="true">1.</strong> 编程语言的选择</a></li><li class="chapter-item expanded "><a href="../LaunchPrinciple.html"><strong aria-hidden="true">2.</strong> 启动原理</a></li><li class="chapter-item expanded "><a href="../FirstChapter/intro.html"><strong aria-hidden="true">3.</strong> 第一章：启动游戏</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../FirstChapter/LaunchArguments.html" class="active"><strong aria-hidden="true">3.1.</strong> 讲解启动参数</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetVersionFolder.html"><strong aria-hidden="true">3.2.</strong> 如何获取versions文件夹</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetJVMAndArgument.html"><strong aria-hidden="true">3.3.</strong> 如何获取jvm、game参数</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetCpLibraries.html"><strong aria-hidden="true">3.4.</strong> 如何获取cp-library值</a></li><li class="chapter-item expanded "><a href="../FirstChapter/SupportInheritsFrom.html"><strong aria-hidden="true">3.5.</strong> 支持inheritsFrom下的MC</a></li><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/LaunchIntro.html"><strong aria-hidden="true">3.6.</strong> 启动游戏！</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/ReplaceTemplate.html"><strong aria-hidden="true">3.6.1.</strong> 替换字符串模板并启动游戏</a></li><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/UnzipNative.html"><strong aria-hidden="true">3.6.2.</strong> 解压Natives文件</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../SecondChapter/Intro.html"><strong aria-hidden="true">4.</strong> 第二章：账号部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../SecondChapter/OfflineLogin.html"><strong aria-hidden="true">4.1.</strong> 离线登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/MicrosoftLogin.html"><strong aria-hidden="true">4.2.</strong> 微软登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/OAuthLogin.html"><strong aria-hidden="true">4.3.</strong> 微软OAuth登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/AuthlibInjectorLogin.html"><strong aria-hidden="true">4.4.</strong> Authlib-Injector第三方登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/RefreshLogin.html"><strong aria-hidden="true">4.5.</strong> 刷新账号</a></li><li class="chapter-item expanded "><a href="../SecondChapter/OfflineSkin.html"><strong aria-hidden="true">4.6.</strong> 离线登录皮肤</a></li></ol></li><li class="chapter-item expanded "><a href="../ThirdChapter/Intro.html"><strong aria-hidden="true">5.</strong> 第三章：下载部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ThirdChapter/GetMCData.html"><strong aria-hidden="true">5.1.</strong> 获取MC元数据</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/DownloadLibraries.html"><strong aria-hidden="true">5.2.</strong> 下载libraries</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/DownloadAssets.html"><strong aria-hidden="true">5.3.</strong> 下载assets</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/SupportThread.html"><strong aria-hidden="true">5.4.</strong> 支持多线程下载</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/LaunchDownloadMC.html"><strong aria-hidden="true">5.5.</strong> 启动自己下载过后的MC</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/Intro.html"><strong aria-hidden="true">5.6.</strong> 模组加载器</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/SupportFabricQuilt.html"><strong aria-hidden="true">5.6.1.</strong> 支持Fabric、Quilt自动安装</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/SupportNeoForge.html"><strong aria-hidden="true">5.6.2.</strong> 支持NeoForge自动安装</a></li></ol></li><li class="chapter-item expanded "><a href="../ThirdChapter/CompleteMissingFiles.html"><strong aria-hidden="true">5.7.</strong> 补全MC的缺失文件</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/CheckFileHash.html"><strong aria-hidden="true">5.8.</strong> 校验文件的hash值</a></li></ol></li><li class="chapter-item expanded "><a href="../TutorWriteTime.html"><strong aria-hidden="true">6.</strong> 教程书写时间</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Let us Make A Minecraft Launcher</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="本章给大家介绍一下启动参数的类型"><a class="header" href="#本章给大家介绍一下启动参数的类型">本章给大家介绍一下启动参数的类型</a></h1>
+<h2 id="默认jvm参数"><a class="header" href="#默认jvm参数">默认JVM参数</a></h2>
+<p>通过上一页教程，我们观察Wiki可以看出几个默认JVM参数【这类参数属于写死进启动参数里的，不能被修改的参数】：</p>
+<div class="table-wrapper"><table><thead><tr><th>参数</th><th>功能</th></tr></thead><tbody>
+<tr><td>-Xmn256m</td><td>新生代堆大小为256MB</td></tr>
+<tr><td>-Xmx&lt;最大内存&gt;m</td><td>指定MC最大可使用内存大小为256MB</td></tr>
+<tr><td>-XX:+UseG1GC</td><td>开启G1</td></tr>
+<tr><td>-XX:-UseAdaptiveSizePolicy</td><td>自动选择年轻代区大小和相应的Survivor区比例</td></tr>
+<tr><td>-XX:-OmitStackTraceInFastThrow</td><td>省略异常栈信息从而快速抛出</td></tr>
+<tr><td>-Dfml.ignoreInvalidMinecraftCertificates=True</td><td>忽略MC无效的证书</td></tr>
+<tr><td>-Dfml.ignorePatchDiscrepancies=True</td><td>忽略修补程序差异</td></tr>
+<tr><td>-Dlog4j2.formatMsgNoLookups=true</td><td>对于Log4J输出的日志只格式化但不查询</td></tr>
+<tr><td>-XX:HeapDumpPath=</td><td></td></tr>
+<tr><td>MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump</td><td>MC默认对于Windows的启动参数。【每个版本必须】</td></tr>
+<tr><td>-Xss1M</td><td>32位Windows特有的参数</td></tr>
+<tr><td>-XstartOnFirstThread</td><td>MC会在第一个线程启动</td></tr>
+<tr><td>-Dminecraft.launcher.brand=&lt;启动器名称&gt;</td><td>对于≤1.12.2版本可以不需要</td></tr>
+<tr><td>-Dminecraft.launcher.version=&lt;启动器版本&gt;</td><td>对于≤1.12.2版本可以不需要</td></tr>
+<tr><td>"-Dos.name=Windows 10"</td><td>对于≤1.12.2版本以及Windows10以下可以不需要</td></tr>
+<tr><td>-Dos.version=10.0</td><td>对于≤1.12.2版本以及Windows10以下可以不需要</td></tr>
+<tr><td>-Dlog4j.configurationFile=&lt;log4j文件路径&gt;\client-1.12.xml</td><td>这个对于Log4J的配置文件可以不需要。</td></tr>
+<tr><td>-Djava.library.path=&lt;natives文件夹路径&gt;</td><td>【每个版本必须】</td></tr>
+<tr><td>-cp "&lt;Minecraft所有类库路径&gt;"</td><td>【每个版本必须】</td></tr>
+</tbody></table>
+</div>
+<p>其中，&lt;最大内存&gt;用于在启动器内填入启动与运行所需要的<font color=red>最大内存</font>。</p>
+<p>然后，&lt;log4j文件路径&gt;\client-1.12.xml代表着你对于Log4J的<font color=red>配置文件路径</font>在哪里。</p>
+<p>再者，&lt;natives文件路径&gt;则代表了你解压出去的Natives文件【也就是MC在启动游戏的时候所需要调用的DLL类库】放在哪里。【natives一般会放在AppData\Local\Temp文件目录下。官启的逻辑】</p>
+<p>还有，&lt;Minecraft所有类库路径&gt;，这个一般是你下载后的<font color=red>Minecraft Libraries路径</font>，这里的路径我们晚点再说。</p>
+<p>上述说到的【对于≤1.12.2可以不需要】代表在1.12.2版本以下可有可无，<font color=red>我给的建议是不要。仅此而已。</font></p>
+<p>这就是MC的默认JVM参数，也就是说每个MC启动的时候都必须附带这些参数。除了我会在里面输入可以不需要的参数以外。然后还有一些没有写什么需要什么不需要的，这就是大家可以添加的参数了。</p>
+<h2 id="额外jvm参数"><a class="header" href="#额外jvm参数">额外JVM参数</a></h2>
+<p>这个就是各位可以添加额外JVM参数的地方，这时，如果我们通过wmic获取PCL2或者HMCL的启动参数之时，我们就会发现其实两个的启动参数都不一样。有部分启动器的JVM参数较多，部分的较少。</p>
+<p>拿最经典的例子来说：【-Djava.net.preferIPv4Stack=true】这个参数原本是让MC优先选取本机中的IPv4地址。但是最近有玩家说IPv6也可以联机，这也就是说明这个参数不能有才能联机。这也是为什么在PCL2以前的某一篇爱发电里说过移除了这个启动参数的原因。</p>
+<p>但是，又有一个问题出现了，在部分的联机中，又必须不能使用IPv6，所以又必须添加进这个参数，因此，这也给了玩家们一种选择，即【选择添加额外JVM参数】，这也是很多启动器能够让玩家自定义MC的JVM参数的原因了。</p>
+<p>还有一个问题，额外JVM参数如果我乱输入几串，很可能会造成无法启动的bug，因此，部分启动器会给玩家一个警告，即【<font color=orange>非专业人士请勿修改本栏</font>】。</p>
+<h2 id="默认游戏参数"><a class="header" href="#默认游戏参数">默认游戏参数</a></h2>
+<p>默认游戏参数，其实在wiki里面已经说得很明白了哦！
+下面列举出MC必要的所有游戏参数</p>
+<div class="table-wrapper"><table><thead><tr><th>参数</th><th>功能</th></tr></thead><tbody>
+<tr><td>net.minecraft.client.main.Main</td><td>MC主类名，对于Vanilla、Forge、Fabric、Quilt均不一致。这个后面再说。</td></tr>
+<tr><td>--username</td><td>后接用户名。</td></tr>
+<tr><td>--version</td><td>后接游戏版本。</td></tr>
+<tr><td>--gameDir</td><td>后接游戏路径。</td></tr>
+<tr><td>--assetsDir</td><td>后接资源文件路径。</td></tr>
+<tr><td>--assetIndex</td><td>后接资源索引版本。</td></tr>
+<tr><td>--uuid</td><td>后接用户UUID。</td></tr>
+<tr><td>--accessToken</td><td>后接登录令牌。</td></tr>
+<tr><td>--clientId</td><td>后接Minecraft客户端ID【一般会用在服务器里面指定，然后被服务器接收从而作为你的身份证明】。【ps：别的启动器一般保留原值。】</td></tr>
+<tr><td>--xuid</td><td>另一种UUID。【暂不清楚用途，别的启动器一般保留原值。】</td></tr>
+<tr><td>--userType</td><td>后接用户类型。</td></tr>
+<tr><td>--versionType</td><td>后接版本类型，会显示在游戏主界面右下角。以及游戏内F3的左上角。</td></tr>
+</tbody></table>
+</div>
+<p>好了，这些大约就是MC的游戏参数了，此参数根据所选的模组加载器的不同而改变。一般来说，启动器内甚至会内置一个【额外游戏参数】的选项，也依旧是非专业人士修改。</p>
+<h2 id="额外游戏参数"><a class="header" href="#额外游戏参数">额外游戏参数</a></h2>
+<p>这里有以下几个：</p>
+<div class="table-wrapper"><table><thead><tr><th>参数</th><th>功能</th></tr></thead><tbody>
+<tr><td>--width</td><td>后接窗口宽度。</td></tr>
+<tr><td>--height</td><td>后接窗口高度。</td></tr>
+<tr><td>--server</td><td>后接服务器地址，游戏进入时将直接连入服务器</td></tr>
+<tr><td>--port</td><td>后接服务器的端口号</td></tr>
+<tr><td>--fullScreen</td><td>是否全屏【单独存在，后面无需接参数。如果加了这个则width、height参数均无效。】</td></tr>
+<tr><td>--demo</td><td>是否开启试玩模式</td></tr>
+</tbody></table>
+</div>
+<p>其中，width和height参数不会让玩家在额外游戏参数里设定，而是直接在启动器内给玩家两个输入框进行设定。就这样了！</p>
+<p>然后，server和port参数一般启动器内都会给一个【输入一打开MC直接进入的服务器地址、端口】，所以这两个参数一般不会让玩家主动填在额外游戏参数里面。</p>
+<p>然后是fullScreen，这个参数在启动器内一般是给予一个复选框，是否在打开MC的时候自动全屏，这时也就是打开MC的时候窗口右上角的方框按钮自动被按下一样。这个参数也一般不会让玩家主动填在额外游戏参数里面。</p>
+<p>最后就是demo参数，这个参数启动器一般不会提供复选框或者单选框，但是会在额外游戏参数中的输入框的【Hint提示】中教玩家如何输入额外游戏参数时拿这个参数做例子。</p>
+<h2 id="在23w14a以上的额外启动参数"><a class="header" href="#在23w14a以上的额外启动参数">在23w14a以上的额外启动参数</a></h2>
+<p>23w14a以上新增了以下几个启动参数：</p>
+<div class="table-wrapper"><table><thead><tr><th>参数</th><th>功能</th></tr></thead><tbody>
+<tr><td>--quickPlayPath</td><td>指定一个相对于运行目录的日志记录的路径【后接路径】</td></tr>
+<tr><td>--quickPlaySinglePlayer</td><td>指定一个单人模式地图【后接名称】</td></tr>
+<tr><td>--quickPlayMultiPlayer</td><td>指定一个多人模式服务器【后接IP与端口】</td></tr>
+<tr><td>--quickPlayRealms</td><td>指定一个Realms的代号【后接你朋友的Realms代号】</td></tr>
+</tbody></table>
+</div>
+<p>参见示例：</p>
+<div class="table-wrapper"><table><thead><tr><th>示例</th><th>功能</th></tr></thead><tbody>
+<tr><td>--quickPlayPath "logs/fancy.log"</td><td>将log日志输出在【.minecraft/logs/fancy.log】下</td></tr>
+<tr><td>--quickPlaySinglePlayer "New World"</td><td>指定一进游戏就直接进入New World这个单人世界</td></tr>
+<tr><td>--quickPlayMultiPlayer "localhost:12345"</td><td>指定一进游戏就直接进入localhost，且端口为12345的服务器</td></tr>
+<tr><td>--quickPlayRealms 1234</td><td>指定一进游戏就直接进入1234代号对应的Realms中。</td></tr>
+</tbody></table>
+</div>
+<p>其中，以上部分参数必须使用正版登录，否则可能会失效噢！</p>
+<p>同时<font color=red>移除</font>了以下几个启动参数：</p>
+<div class="table-wrapper"><table><thead><tr><th>参数</th></tr></thead><tbody>
+<tr><td>--server</td></tr>
+<tr><td>--port</td></tr>
+</tbody></table>
+</div>
+<p>在这里，我们的Wiki已经为我们写好了有关于此部分的所有特性！参见<a href="https://zh.minecraft.wiki/w/23w14a">此网址</a>，向下滑动直到找到【移除了启动参数】一栏。</p>
+<p>那么，在之后的章节中，我只会教大家如何拼接基本的Minecraft启动参数，对于以上几个新增的，我就不管了！</p>
+<h2 id="总结"><a class="header" href="#总结">总结</a></h2>
+<p>游戏参数总结：只有这一点点的额外游戏参数，多了没有，少了可以！因此我不建议大家在启动器里写让玩家输入额外游戏参数的输入框，只需要写一个额外JVM参数的框就可以了。</p>
+<p>这就是MC的启动参数部分，我们将所有启动参数拼接完成之后，利用程序调用cmd执行命令的函数对其进行执行即可启动MC！</p>
+<p>其中，默认参数是每个MC启动时必须添加的参数，其次，额外的参数为非必须参数哦！</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../FirstChapter/intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../FirstChapter/GetVersionFolder.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../FirstChapter/intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../FirstChapter/GetVersionFolder.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

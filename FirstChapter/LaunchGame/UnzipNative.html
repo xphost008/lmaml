@@ -1,0 +1,430 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>解压Natives文件 - Let us Make A Minecraft Launcher</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../intro.html">导论</a></li><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../../ProgrammingLanguage.html"><strong aria-hidden="true">1.</strong> 编程语言的选择</a></li><li class="chapter-item expanded "><a href="../../LaunchPrinciple.html"><strong aria-hidden="true">2.</strong> 启动原理</a></li><li class="chapter-item expanded "><a href="../../FirstChapter/intro.html"><strong aria-hidden="true">3.</strong> 第一章：启动游戏</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../FirstChapter/LaunchArguments.html"><strong aria-hidden="true">3.1.</strong> 讲解启动参数</a></li><li class="chapter-item expanded "><a href="../../FirstChapter/GetVersionFolder.html"><strong aria-hidden="true">3.2.</strong> 如何获取versions文件夹</a></li><li class="chapter-item expanded "><a href="../../FirstChapter/GetJVMAndArgument.html"><strong aria-hidden="true">3.3.</strong> 如何获取jvm、game参数</a></li><li class="chapter-item expanded "><a href="../../FirstChapter/GetCpLibraries.html"><strong aria-hidden="true">3.4.</strong> 如何获取cp-library值</a></li><li class="chapter-item expanded "><a href="../../FirstChapter/SupportInheritsFrom.html"><strong aria-hidden="true">3.5.</strong> 支持inheritsFrom下的MC</a></li><li class="chapter-item expanded "><a href="../../FirstChapter/LaunchGame/LaunchIntro.html"><strong aria-hidden="true">3.6.</strong> 启动游戏！</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../FirstChapter/LaunchGame/ReplaceTemplate.html"><strong aria-hidden="true">3.6.1.</strong> 替换字符串模板并启动游戏</a></li><li class="chapter-item expanded "><a href="../../FirstChapter/LaunchGame/UnzipNative.html" class="active"><strong aria-hidden="true">3.6.2.</strong> 解压Natives文件</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../SecondChapter/Intro.html"><strong aria-hidden="true">4.</strong> 第二章：账号部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../SecondChapter/OfflineLogin.html"><strong aria-hidden="true">4.1.</strong> 离线登录</a></li><li class="chapter-item expanded "><a href="../../SecondChapter/MicrosoftLogin.html"><strong aria-hidden="true">4.2.</strong> 微软登录</a></li><li class="chapter-item expanded "><a href="../../SecondChapter/OAuthLogin.html"><strong aria-hidden="true">4.3.</strong> 微软OAuth登录</a></li><li class="chapter-item expanded "><a href="../../SecondChapter/AuthlibInjectorLogin.html"><strong aria-hidden="true">4.4.</strong> Authlib-Injector第三方登录</a></li><li class="chapter-item expanded "><a href="../../SecondChapter/RefreshLogin.html"><strong aria-hidden="true">4.5.</strong> 刷新账号</a></li><li class="chapter-item expanded "><a href="../../SecondChapter/OfflineSkin.html"><strong aria-hidden="true">4.6.</strong> 离线登录皮肤</a></li></ol></li><li class="chapter-item expanded "><a href="../../ThirdChapter/Intro.html"><strong aria-hidden="true">5.</strong> 第三章：下载部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ThirdChapter/GetMCData.html"><strong aria-hidden="true">5.1.</strong> 获取MC元数据</a></li><li class="chapter-item expanded "><a href="../../ThirdChapter/DownloadLibraries.html"><strong aria-hidden="true">5.2.</strong> 下载libraries</a></li><li class="chapter-item expanded "><a href="../../ThirdChapter/DownloadAssets.html"><strong aria-hidden="true">5.3.</strong> 下载assets</a></li><li class="chapter-item expanded "><a href="../../ThirdChapter/SupportThread.html"><strong aria-hidden="true">5.4.</strong> 支持多线程下载</a></li><li class="chapter-item expanded "><a href="../../ThirdChapter/LaunchDownloadMC.html"><strong aria-hidden="true">5.5.</strong> 启动自己下载过后的MC</a></li><li class="chapter-item expanded "><a href="../../ThirdChapter/ModLoader/Intro.html"><strong aria-hidden="true">5.6.</strong> 模组加载器</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ThirdChapter/ModLoader/SupportFabricQuilt.html"><strong aria-hidden="true">5.6.1.</strong> 支持Fabric、Quilt自动安装</a></li><li class="chapter-item expanded "><a href="../../ThirdChapter/ModLoader/SupportNeoForge.html"><strong aria-hidden="true">5.6.2.</strong> 支持NeoForge自动安装</a></li></ol></li><li class="chapter-item expanded "><a href="../../ThirdChapter/CompleteMissingFiles.html"><strong aria-hidden="true">5.7.</strong> 补全MC的缺失文件</a></li><li class="chapter-item expanded "><a href="../../ThirdChapter/CheckFileHash.html"><strong aria-hidden="true">5.8.</strong> 校验文件的hash值</a></li></ol></li><li class="chapter-item expanded "><a href="../../TutorWriteTime.html"><strong aria-hidden="true">6.</strong> 教程书写时间</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Let us Make A Minecraft Launcher</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="本章教会大家如何解压natives文件"><a class="header" href="#本章教会大家如何解压natives文件">本章教会大家如何解压Natives文件</a></h1>
+<p>ps：本章仅仅适用于1.19-pre1版本及以下。</p>
+<p>首先哈，在部分的版本json文件中，我们总能看到有这么一种影子：libraries-&gt;downloads-&gt;classifiers键，这个键所指的是什么意思呢？其实，这个关系到一个很重要的概念：Natives本地库的解压。</p>
+<p>在上一期，我已经说过了，需要大家在别的启动器中不仅下载过一次游戏，而且需要启动过一次后，才可以正常在本启动器中启动。</p>
+<p>那么这到底是为什么呢？本章就要来为大家探讨这个问题。</p>
+<p>首先，我们众所周知，MC在启动的时候，会在versions/<versionName>中自动生成一个存放本地库的文件夹，这个本地库用在启动参数中的【-Djava.library.path=&lt;Native本地库路径&gt;】。</p>
+<p>然后嘛，用过官启的小伙伴们，肯定都应该知道，官启是将Natives本地库解压到【C:\Users&lt;用户名&gt;\AppData\Local\Temp】路径下的，也就意味着电脑重启一次，该本地库将会被自动删除。</p>
+<p>但我们这么想，几乎所有的第三方启动器，都是将Natives本地库解压到【versions&lt;versionName&gt;&lt;版本名&gt;-natives】库下。</p>
+<p>而我们的启动器已经设置过了，自动检测versionname下面出现的第一个有natives关键字的程序。因此，直接解压就好了捏！</p>
+<p>请看代码：【依旧存放在Launcher类下，由UnzipNative方法名断定。】</p>
+<pre><code class="language-cs">function Launcher.UnzipNatives(json: TJsonObject; path, relpath: String): Boolean;
+begin //其实，乍一看这个方法，居然与前面的GetCPLibraries函数近乎一致，甚至连参数都是一样的。只是这个返回值变成了Boolean值罢了。
+  result := false; //初始返回值为false
+  var sb := TStringBuilder.Create; //定义好几个初始变量，与GetCPLibraries一致。
+  var Yuan := TStringList.Create;
+  var LibNo := TStringList.Create;
+  var NoRe := TStringList.Create;
+  var ReTemp := TStringList.Create;
+  var vername := ExtractFileName(relpath); //获取版本文件夹下的版本名字。
+  if path.LastIndexOf('\\') &lt;&gt; path.Length - 1 then path := Concat(path, '\\');
+  try //解析Json
+    var Jr := json.GetValue('libraries') as TJsonArray; //获取libraries中的内容
+    for var I in Jr do //添加元素，并将name转换成path加入进yuan数组
+    begin
+      try //找不同游戏，本次找不同你的对手是：Mojang！【又来一次找不同啊！】
+        var Jr1 := I as TJsonObject;
+        var pdd := true;
+        try
+          var rl := Jr1.GetValue('rules') as TJsonArray; //获取某一个元素的rulWe值。
+          for var J in rl do begin  //下面开始判断rule值里面的action的os是否支持windows
+            var r1 := J as TJsonObject;
+            var an := r1.GetValue('action').Value;
+            if an = 'allow' then begin
+              var r2 := r1.GetValue('os') as TJsonObject;
+              var r3 := r2.GetValue('name').Value;
+              if r3 &lt;&gt; 'windows' then begin pdd := false; end; //如果支持windows，则pdd为true，反之则为false
+            end else if an = 'disallow' then begin
+              var r2 := r1.GetValue('os') as TJsonObject;
+              var r3 := r2.GetValue('name').Value;
+              if r3 = 'windows' then begin pdd := false; end;
+            end;
+          end;
+        except end;
+        var arch := IfThen(IsX64, '64', '32');  //直接开始查询natives，如果有x64之类的替换，则替换即可。这里是用于适配1.7.10中的json文件。
+        var Jr2 := Jr1.GetValue('name').Value;  //查询name值。
+        var Jr3 := Jr1.GetValue('natives') as TJsonObject; //查询natives值。
+        var Jr4 := Jr3.GetValue('windows').Value.Replace('${arch}', arch); //如果遇到了有arch需要替换的键，则替换即可。
+        if pdd then Yuan.Add(Concat(Jr2, ':', Jr4)); //直接开始加入Yuan列表中。
+      except
+        continue; //如果出现了报错，则跳过。
+      end;
+    end;//去除重复
+    for var N in Yuan do 
+      if LibNo.IndexOf(N) = -1 then // 去除重复
+        LibNo.Add(N);
+    for var G in libNo do begin //去除版本较低的那个，以下为去除不必要的重复
+      var KN := G.Replace('.', '').Replace(':', '').Replace('-', '').Replace('/', '');
+      var KW := ExtractNumber(KN, false); //摘取字符
+      var KM := ExtractNumber(KN, true).Substring(0, 9);  //摘取数字
+      strtoint(KM);
+      if ReTemp.IndexOf(KW) = -1 then begin //判断是否
+        ReTemp.Add(KW);
+        NoRe.Add(G);
+      end else if strtoint(ExtractNumber(NoRe[ReTemp.IndexOf(KW)], true).Substring(0, 9)) &lt;= strtoint(KM) then begin
+        NoRe.Delete(ReTemp.IndexOf(KW));
+        NoRe.Insert(ReTemp.IndexOf(KW), G); // 添加新元素
+      end;
+    end;
+    if not DirectoryExists(getMCRealDir(relpath, 'natives')) then //如果不存在natives文件夹的话，以下用了双右划号的同上几章一样处理。
+    begin //此处才开始认真起来，前面大部分都是仿照GetCPLibraries的。
+      ForceDirectories(Concat(relpath, '\\', vername, '-natives')); //创建一个新的文件夹。
+      if NoRe.Count = 0 then //如果查询出的文件为0，则创建一个新文件且不解压。
+      begin //直接返回true，并退出该函数。
+        result := true;
+        exit;
+      end;
+      for var C in Nore do  //如果不为空，则开始循环判断并且解压，如果解压不成功，则返回空。
+      begin
+        if not UnzipMethod(Concat(path, 'libraries\\', ConvertNameToPath(C).Replace('/', '\\')), Concat(relpath, '\\', vername, '-natives')) then begin
+          continue;
+        end;
+      end; //如果以上不仅检测出来，还解压全部成功，则判断version文件夹中是否有natives文件，如果有，则删除除了dll文件以外的所有文件。
+      DeleteRetain(getMCRealDir(relpath, 'natives'), '.dll');
+      if not DirectoryExists(getMCRealDir(relpath, 'natives')) then begin
+        ForceDirectories(Concat(relpath, '\\', vername, '-LLL-natives'));
+        result := true;
+        abort;
+      end;//如果任何一项不完成，则返回值设为false。
+    end; 
+    result := true;
+  finally
+    sb.Free; //给所有free掉
+    Yuan.Free;
+    libNo.Free;
+    NoRe.Free;
+    ReTemp.Free;
+  end;
+end;
+</code></pre>
+<p>好了，以上就是解压Natives了！自己一看，还真的与GetCPLibraries差不多一致呢！
+这个函数是在Launcher类下的，因为我们只需要用其解压Natives参数，别的时候都用不着。</p>
+<p>上面我们使用了一个三元运算符的Delphi内置函数，叫做IfThen，这个函数可以引用下列单元文件可以使用：</p>
+<pre><code class="language-cs">uses
+  StrUtils;
+</code></pre>
+<p>然后，还有，此处我们需要判断如果使用的Windows电脑到底是32位的，还是64位的。我们需要做的是新建一个IsX64函数。
+函数如下：</p>
+<pre><code class="language-cs">function isX64: Boolean;
+var
+  si: SYSTEM_INFO;
+begin //将上方变量获取系统本地信息。
+  GetNativeSystemInfo(&amp;si); // = 9 表示的是 AMD64
+  if(si.wProcessorArchitecture = PROCESSOR_ARCHITECTURE_AMD64 {9}) or
+    (si.wProcessorArchitecture = PROCESSOR_ARCHITECTURE_IA64) then //如果是AMD64或者是IA64，则返回True，否则返回false。
+    Result := True
+  else
+    Result := False;
+end;
+</code></pre>
+<p>然后捏，这个函数我们由于与GetOutsideDocument差不多一致，因此，我们需要在implementation上方写上这串代码的声明哦！我们就无需在Launcher类里面声明了。</p>
+<p>再者，我们还需要写两个函数，第一个函数是：UnzipMethod，这个函数用于传入两个参数，第一个是需要解压的zip或者别的后缀的文件，第二个参数是解压的路径【第一个参数是具体的文件，第二个参数是一个文件夹路径】</p>
+<p>实现如下：</p>
+<pre><code class="language-cs">function UnzipMethod(zippath, forderpath: String): Boolean;
+begin
+  result := false;
+  if DirectoryExists(forderpath) then ForceDirectories(forderpath);
+  if not FileExists(zippath) then exit;
+  var zp := TZipFile.Create;
+  try
+    zp.Open(zippath, zmRead); //打开压缩包
+    zp.ExtractAll(forderpath); //解压压缩包
+    result := true;
+  finally
+    zp.Free;
+  end;
+end;
+</code></pre>
+<p>在使用这个函数解压的时候，我们需要引用一个单元文件：</p>
+<pre><code class="language-cs">uses
+  Zip;
+</code></pre>
+<p>这个函数写好之后，下一个函数就是DeleteRetain函数，这个函数也是填入两个参数【说实话，这个函数其实没有必要的，但是又其实有点小必要吧。】【第一个参数：要删掉的总文件夹路径，第二个参数：要保留的文件后缀。】</p>
+<p>其实，说实话，这个函数很危险，稍有不慎【例如删掉的总文件夹路径填为空】，可能会引发格式化磁盘的风险。</p>
+<p>但我还是得和玩家说说啦：</p>
+<pre><code class="language-cs">function DeleteRetain(N, suffix: String): Boolean;
+var
+  F: TSearchRec;
+begin
+  result := false;
+  if N = '' then exit;
+  if (suffix = '') or (suffix = '.') then exit;
+  if N.IndexOf('\\') = -1 then exit;
+  if FindFirst(Concat(N, '\*.*'), faAnyFile, F) = 0 then begin //查找文件并赋值
+    try
+      repeat  //此处调用了API函数。
+        var S: String := F.Name;
+        if (F.Attr and faDirectory) &gt; 0 then //查找是否为文件夹，如果是则执行
+        begin
+          if (S &lt;&gt; '.') and (S &lt;&gt; '..') then //删除首次寻找文件时出现的【.】和【..】字符。
+            DeleteRetain(Concat(N, '\\', S), suffix) //重复调用本函数，并且加上文件名。
+        end
+        else
+          if S.Substring(S.LastIndexOf('.', S.Length)) &lt;&gt; suffix then DeleteFile(N + '\\' + F.Name); //如果没发现后缀为suffix的话，则执行。
+      until FindNext(F) &lt;&gt; 0; //查询下一个。
+    finally
+      FindClose(F); //关闭文件查询。
+    end;
+    RemoveDir(N);
+    result := true;
+  end;
+end;
+</code></pre>
+<p>这个函数，我们就不写在Launcher类下了，与上面两个函数一致，我们在将来程序运用中将经常运用到这个函数。我们只需要在implementation上写这个就好了。</p>
+<p>好了，在敲完上述代码之后，我们只需要应用就好了！，我们只需要在Button1Click执行一次这个即可啦！</p>
+<p>请看代码：</p>
+<pre><code class="language-cs">  var res := lch.SelectParam(root); //成功获取到拼接完成后的json文件。
+
+  //在这两行代码的中间，新建一个这样的代码块
+  if not UnzipNatives(root, MinecraftPath, spath) then begin
+    messagebox(Handle, '解压Natives文件失败，请从别的启动器启动一次，再尝试启动吧！', '解压Natives失败', MB_ICONERROR);
+    exit;
+  end;
+
+  res := Concat(res, ' --width ', wt, ' --height ', ht); //新增最后两个参数，分别代表了长宽高。这里我一般会输入1000和800。
+</code></pre>
+<p>好了，非常简单的代码实现，就写完了！现在，大家终于可以在别的启动器直接下载好，然后直接在本启动器就可以直接启动了！大家可以先行一步，去versions\versionName\目录下，删掉含有natives的任何子目录，然后再尝试启动游戏哦！</p>
+<p>这里墙裂建议使用1.12.2或者1.16.5进行测试，当然你用别的MC版本启动也是可以哒！</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../FirstChapter/LaunchGame/ReplaceTemplate.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../SecondChapter/Intro.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../FirstChapter/LaunchGame/ReplaceTemplate.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../SecondChapter/Intro.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

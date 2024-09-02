@@ -1,0 +1,433 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>支持inheritsFrom下的MC - Let us Make A Minecraft Launcher</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">导论</a></li><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../ProgrammingLanguage.html"><strong aria-hidden="true">1.</strong> 编程语言的选择</a></li><li class="chapter-item expanded "><a href="../LaunchPrinciple.html"><strong aria-hidden="true">2.</strong> 启动原理</a></li><li class="chapter-item expanded "><a href="../FirstChapter/intro.html"><strong aria-hidden="true">3.</strong> 第一章：启动游戏</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../FirstChapter/LaunchArguments.html"><strong aria-hidden="true">3.1.</strong> 讲解启动参数</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetVersionFolder.html"><strong aria-hidden="true">3.2.</strong> 如何获取versions文件夹</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetJVMAndArgument.html"><strong aria-hidden="true">3.3.</strong> 如何获取jvm、game参数</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetCpLibraries.html"><strong aria-hidden="true">3.4.</strong> 如何获取cp-library值</a></li><li class="chapter-item expanded "><a href="../FirstChapter/SupportInheritsFrom.html" class="active"><strong aria-hidden="true">3.5.</strong> 支持inheritsFrom下的MC</a></li><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/LaunchIntro.html"><strong aria-hidden="true">3.6.</strong> 启动游戏！</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/ReplaceTemplate.html"><strong aria-hidden="true">3.6.1.</strong> 替换字符串模板并启动游戏</a></li><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/UnzipNative.html"><strong aria-hidden="true">3.6.2.</strong> 解压Natives文件</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../SecondChapter/Intro.html"><strong aria-hidden="true">4.</strong> 第二章：账号部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../SecondChapter/OfflineLogin.html"><strong aria-hidden="true">4.1.</strong> 离线登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/MicrosoftLogin.html"><strong aria-hidden="true">4.2.</strong> 微软登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/OAuthLogin.html"><strong aria-hidden="true">4.3.</strong> 微软OAuth登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/AuthlibInjectorLogin.html"><strong aria-hidden="true">4.4.</strong> Authlib-Injector第三方登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/RefreshLogin.html"><strong aria-hidden="true">4.5.</strong> 刷新账号</a></li><li class="chapter-item expanded "><a href="../SecondChapter/OfflineSkin.html"><strong aria-hidden="true">4.6.</strong> 离线登录皮肤</a></li></ol></li><li class="chapter-item expanded "><a href="../ThirdChapter/Intro.html"><strong aria-hidden="true">5.</strong> 第三章：下载部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ThirdChapter/GetMCData.html"><strong aria-hidden="true">5.1.</strong> 获取MC元数据</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/DownloadLibraries.html"><strong aria-hidden="true">5.2.</strong> 下载libraries</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/DownloadAssets.html"><strong aria-hidden="true">5.3.</strong> 下载assets</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/SupportThread.html"><strong aria-hidden="true">5.4.</strong> 支持多线程下载</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/LaunchDownloadMC.html"><strong aria-hidden="true">5.5.</strong> 启动自己下载过后的MC</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/Intro.html"><strong aria-hidden="true">5.6.</strong> 模组加载器</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/SupportFabricQuilt.html"><strong aria-hidden="true">5.6.1.</strong> 支持Fabric、Quilt自动安装</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/SupportNeoForge.html"><strong aria-hidden="true">5.6.2.</strong> 支持NeoForge自动安装</a></li></ol></li><li class="chapter-item expanded "><a href="../ThirdChapter/CompleteMissingFiles.html"><strong aria-hidden="true">5.7.</strong> 补全MC的缺失文件</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/CheckFileHash.html"><strong aria-hidden="true">5.8.</strong> 校验文件的hash值</a></li></ol></li><li class="chapter-item expanded "><a href="../TutorWriteTime.html"><strong aria-hidden="true">6.</strong> 教程书写时间</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Let us Make A Minecraft Launcher</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="本章我们将对forgefabricquilt特定的json文件进行支持"><a class="header" href="#本章我们将对forgefabricquilt特定的json文件进行支持">本章，我们将对Forge、Fabric、Quilt特定的JSON文件进行支持。</a></h1>
+<p>首先，众所周知，在Forge、Fabric、Quilt【以下简称模组加载器】中，原版的下载MC时，部分启动器可能会直接将原有的Json文件给Get下来，而不是将模组加载器的Json与原版Json进行合并。</p>
+<p>这时，我们就要好好的研究一下，对于模组加载器原版的Json文件到底是怎样的获取了。</p>
+<p>然后，在这一章节，我们便可以了解为什么上一章中获取库文件我们不是直接获取downloads-&gt;artifact-&gt;path而是获取name了。</p>
+<p>首先，让我们看看1.12.2Forge的部分Json文件吧！【ps：我选取的是1.12.2forge-2847的】</p>
+<pre><code class="language-json">{
+	"id": "1.12.2-forge1.12.2-14.23.5.2847",
+	"time": "2019-09-10T01:22:54+0000",
+	"releaseTime": "1960-01-01T00:00:00-0700",
+	"type": "release",
+	"minecraftArguments": "--username ${auth_player_name} --version ${version_name} --gameDir ${game_directory} --assetsDir ${assets_root} --assetIndex ${assets_index_name} --uuid ${auth_uuid} --accessToken ${auth_access_token} --userType ${user_type} --tweakClass net.minecraftforge.fml.common.launcher.FMLTweaker --versionType Forge",
+	"mainClass": "net.minecraft.launchwrapper.Launch",
+	"inheritsFrom": "1.12.2",
+	"jar": "1.12.2",
+	"logging": {},
+	"libraries": [
+		{
+			"name": "net.minecraftforge:forge:1.12.2-14.23.5.2847",
+			"url": "https://maven.minecraftforge.net/"
+		},
+		{
+			"name": "net.minecraft:launchwrapper:1.12",
+			"serverreq": true
+		}
+        ... //一大堆类库
+	]
+}
+</code></pre>
+<p>首先，我们可以看到在这个Json文件上面，有几个非常关键的信息，首先就是我们的id键，这个键需要替换掉原版的id键，确信。</p>
+<p>然后我们还可以看到里面有minecraftArguments键，如果大家看过Minecraft原版的1.12.2的Json文件的话，应该能理解这个的意思。但是在这里，这个键需要替换掉原版的键，因为这个键已经拥有了Minecraft在1.12.2里面原版的所有键值了。</p>
+<p>然后嘛，mainClass也是需要替换掉原版的mainClass的，</p>
+<p>最后，就是我们的libraries键了，这些键并不是替换掉原版的libraries键哦，而是<font color=red>附加</font>在原版的libraries键后面。将这个类库所有的全部附加到原版的libraries键里面。</p>
+<p>同时，这个libraries只有一个url键，甚至连downloads键都没有，因此，我们需要根据name的值来判断其文件目录。</p>
+<p>那么，我们需要做的目的是什么呢？答案显而易见，我们通过查看PCL2下载的json文件，就可以得知：PCL2其实已经将我们的forge-2847文件附加到了原版的1.12.2里面了，也就是PCL2下载的是一个<font color=red>杂合体</font>。</p>
+<p>那我们应该怎么找到原版的1.12.2键呢？如果我们下载到了类似于这样的json而不是像PCL2那样的json，那该怎么办呢？</p>
+<p>答案也很显而易见，我们需要找它的inheritsFrom键下面的原版json。其实嘛，假如我们只像PCL2那样，只是遍历一次父文件夹versions下面的所有文件夹名称，然后找到与inheritsFrom键值相同的，即可判断成功，那可真是太low了。</p>
+<p>如上面所做，这样只是判断versions如果没有原版文件夹，那这个forge版本将会检测失败，从而抛出报错。提示玩家需要下载一次原版后，再尝试启动游戏。</p>
+<p>我们需要做的，是不仅遍历一次versions下面的所有文件夹，而且需要检测里面版本json文件里的的id键值是否为forge的inheritsFrom值。这样，我们就可以做到精确的查询到获取原版的json文件进行拼接了。总而言之，我们做的工作，是要在兼容PCL2、HMCL、BakaXL的情况下，尽量做到更加精确，更加准确。</p>
+<p>哦对了，还有一个地方需要判断，我们仔细的看看这个文件，里面似乎还有一个jar键，这个键指的是什么意思呢？看起来似乎与inheritsFrom键一样欸！</p>
+<p>这个键的意思指的是原版的jar键，我们需要在当前json同级目录下，下载一个原版的主jar文件作为forge的加载项，同样是添加到启动参数cp的末尾versions的那个主jar文件。是的，就是这么简单！</p>
+<p>好了，废话少说，我们开始看代码：</p>
+<p>首先，第一步，我们需要写一个函数，函数名可以叫做【GetInheritsFrom】，用于判断json是否有指定键值，如果有，则返回父versions键，开始遍历文件夹，然后查询是否有符合条件的id。该函数接收两个参数，第一个是【path: String】，意思是传入我们存放json的那个文件夹路径。第二个是【suffix: String】，指的是我们需要判断的键，可以填入inheritsFrom，也可以填入jar。返回值是：【String】如果找到了inheritsFrom，则返回有这个键的父文件夹，就是【versions/[inherits]】这个文件夹。</p>
+<p>由于这个函数是隶属于Launcher类下的，因此，我无需再写声明函数部分，<font color=red>大家在下文，假如看见了任何一个方法名前面加上了之前定义好的类名的话，那就在这个类里面写上该方法的声明即可。</font></p>
+<pre><code class="language-cs">function Launcher.GetInheritsFrom(path, suffix: string): string;
+var
+  Dirs: TArray&lt;String&gt;; //定义一个查询versions下的所有子目录的数组
+  Files: TArray&lt;String&gt;; //定义一个随时可以删掉的上面子目录下的所有文件数组。
+begin
+  result := ''; //返回值定义为空
+  if DirectoryExists(path) then begin //判断path是否存在，如果存在则执行。
+    var ph := GetRealPath(path, '.json'); //获取该path下的真实json路径。
+    if FileExists(ph) then begin //如果json的确存在，则执行。反之则不执行。
+      var Rt := TJsonObject.ParseJSONValue(GetOutsideDocument(ph)) as TJsonObject;
+      try //获取该json的内容，并转换成Json对象形式。
+        var ihtf := Rt.GetValue(suffix).Value; //判断里面是否有【第二个参数】键，如果有，则不抛出报错。如果没有，则抛出报错，返回值为原path。
+        if ihtf = '' then begin result := path; exit; end; //如果inheritsFrom键为空值，也是如此。
+        var vdir := ExtractFileDir(path); //获取path的父文件夹【也就是versions文件夹】
+        Dirs := TDirectory.GetDirectories(vdir); //获取该文件夹下的所有子目录，是的，这里是获取文件夹而非文件。
+        for var I in Dirs do begin //使用for循环遍历versions下的子目录
+          Files := TDirectory.GetFiles(I); //获取子目录中的所有文件
+          for var J in Files do begin //开始循环判断子目录中的所有文件
+            if RightStr(J, 5) = '.json' then begin //如果后缀为json
+              try //执行，将文件转换成json对象
+                var Rt2 := TJsonObject.ParseJSONValue(GetOutsideDocument(J)) as TJsonObject; 
+                var jid := Rt2.GetValue('id').Value; //开始判断里面是否有id键
+                var tmp := Rt2.GetValue('libraries').ToString; //判断里面是否有libraries键
+                var ttt := Rt2.GetValue('mainClass').Value; //判断里面是否有mainClass键。
+                if jid = ihtf then begin //此时，开始判断如果id键等于inheritsFrom键值，则将该文件夹目录进行返回。否则跳过。
+                  result := I;
+                  exit; //记住了，这是返回文件夹的目录，而不是返回Json文件的路径
+                end;
+                continue; //如果不满足，则跳过。
+              except
+                continue; //如果不满足，则跳过。
+              end;
+            end;
+          end;
+        end;
+      except
+        result := path; //如果上述代码开头发生了报错，则返回值为原值。
+      end;
+    end;
+  end;
+end;
+</code></pre>
+<p>然后呢，在这里我们使用了一个函数为RightStr，这个函数的意思是从右取字符串，第一个参数填入原字符串，第二个参数填入从右往左数的第几个之右的所有字符串。</p>
+<p>这个是Delphi内置的一个函数，我们可以引用以下头文件使用它</p>
+<pre><code class="language-cs">uses
+  StrUtils;
+</code></pre>
+<p>我们可以看到，上面我们用了几次GetOutsideDocument，这是否说明了上一章说的函数可以被我们随时调用了呢？</p>
+<p>然后，此时我们就应该可以通过inheritsFrom键获取原版的文件夹路径了。</p>
+<p>然后嘛，我们还得再看一个东西，那就是在1.13版本以上的forge的json文件。为什么要看这个呢？因为forge在里面新增了许许多多的默认jvm和默认game参数，以及许多的类库。上面我们看的是1.12.2的，那么下面我们就要看的是1.19.4的forge的json文件了：</p>
+<pre><code class="language-json">{
+    "_comment_": [
+        "Please do not automate the download and installation of Forge.",
+        "Our efforts are supported by ads from the download page.",
+        "If you MUST automate this, please consider supporting the project through https://www.patreon.com/LexManos/"
+    ],
+    "id": "1.19.4-forge-45.0.43",
+    "time": "2023-04-07T06:24:13+00:00",
+    "releaseTime": "2023-04-07T06:24:13+00:00",
+    "type": "release",
+    "mainClass": "cpw.mods.bootstraplauncher.BootstrapLauncher",
+    "inheritsFrom": "1.19.4",
+    "logging": {
+        
+    }, //此处为默认的JVM、game参数【由于此处没有rules规则的参数，因此此处没有额外的JVM参数，一切按照原版指示来做。】
+    "arguments": {
+        "game": [ //一大堆的有关于forge的默认game参数
+            "--launchTarget",
+            "forgeclient",
+            "--fml.forgeVersion",
+            "45.0.43",
+            "--fml.mcVersion",
+            "1.19.4",
+            "--fml.forgeGroup",
+            "net.minecraftforge",
+            "--fml.mcpVersion",
+            "20230314.122934"
+        ],
+        "jvm": [ //有关于forge的一大堆jvm参数。
+            "-Djava.net.preferIPv6Addresses=system",
+            "-DignoreList=bootstraplauncher,securejarhandler,asm-commons,asm-util,asm-analysis,asm-tree,asm,JarJarFileSystems,client-extra,fmlcore,javafmllanguage,lowcodelanguage,mclanguage,forge-,${version_name}.jar",
+            "-DmergeModules=jna-5.10.0.jar,jna-platform-5.10.0.jar",
+            "-DlibraryDirectory=${library_directory}",
+            "-p",
+            "${library_directory}/cpw/mods/bootstraplauncher/1.1.2/bootstraplauncher-1.1.2.jar${classpath_separator}${library_directory}/cpw/mods/securejarhandler/2.1.6/securejarhandler-2.1.6.jar${classpath_separator}${library_directory}/org/ow2/asm/asm-commons/9.3/asm-commons-9.3.jar${classpath_separator}${library_directory}/org/ow2/asm/asm-util/9.3/asm-util-9.3.jar${classpath_separator}${library_directory}/org/ow2/asm/asm-analysis/9.3/asm-analysis-9.3.jar${classpath_separator}${library_directory}/org/ow2/asm/asm-tree/9.3/asm-tree-9.3.jar${classpath_separator}${library_directory}/org/ow2/asm/asm/9.3/asm-9.3.jar${classpath_separator}${library_directory}/net/minecraftforge/JarJarFileSystems/0.3.19/JarJarFileSystems-0.3.19.jar",
+            "--add-modules",
+            "ALL-MODULE-PATH",
+            "--add-opens",
+            "java.base/java.util.jar=cpw.mods.securejarhandler",
+            "--add-opens",
+            "java.base/java.lang.invoke=cpw.mods.securejarhandler",
+            "--add-exports",
+            "java.base/sun.security.util=cpw.mods.securejarhandler",
+            "--add-exports",
+            "jdk.naming.dns/com.sun.jndi.dns=java.naming"
+        ]
+    },
+    "libraries": [
+        {
+            "name": "cpw.mods:securejarhandler:2.1.6",
+            "downloads": {
+                "artifact": {
+                    "path": "cpw/mods/securejarhandler/2.1.6/securejarhandler-2.1.6.jar",
+                    "url": "https://maven.minecraftforge.net/cpw/mods/securejarhandler/2.1.6/securejarhandler-2.1.6.jar",
+                    "sha1": "66c15fc1f522b586476e9e4cccd0cbe192554e8a",
+                    "size": 87783
+                }
+            }
+        },
+        ... //众多类库。
+    ]
+}
+</code></pre>
+<p>好了，那么在这个json文件里面，我们唯一需要多注意一点的就是在这里面没有minecraftArguments键，取而代之的是arguments-&gt;jvm和arguments-&gt;game两个键值，因此在实际操作的时候，我们需要按照这两个逐步进行判断。</p>
+<p>然后嘛，我们要做的第二步，就是将这个键下的原版MC的json与我们的Forge版json进行合并，记住，合并这一步是在内存当中合并，我们暂时没必要将其输出到文件中，因为我们已经拥有了该启动的所有类，这一步是为了迎合PCL2，当然，如果你想要输出到文件，那我也没辙。。</p>
+<p>现在开始看代码吧：
+该函数传入两个参数，其中yuanjson参数代表着我们有inheritsFrom的forge的json字符串形式的数据。然后gaijson指的是我们的原版json文件。返回值则返回一个拼接后的字符串【需要自己转成Json对象格式】。</p>
+<pre><code class="language-cs">function Launcher.ReplaceInheritsFrom(yuanjson, gaijson: string): string;
+begin
+  if yuanjson = '' then begin result := ''; exit; end;  //如果任意一个json为空，则返回空。
+  if gaijson = '' then begin result := ''; exit; end; //同上。
+  if yuanjson = gaijson then begin result := yuanjson; exit; end; //如果两个json一样，则返回原值。
+  var Rty := TJsonObject.ParseJSONValue(yuanjson) as TJsonObject; //将两个字符串转成json
+  var Rtg := TJsonObject.ParseJSONValue(gaijson) as TJsonObject; //同上
+  Rtg.RemovePair('mainClass'); //删掉原版里面的mainClass数据
+  Rtg.AddPair('mainClass', Rty.GetValue('mainClass').Value); //将模组加载器的json中的mainClass添加进去。
+  Rtg.RemovePair('id'); //删掉原版id键
+  Rtg.AddPair('id', Rty.GetValue('id').Value); //将模组加载器中的id键添加进去。
+  for var I in (Rty.GetValue('libraries') as TJsonArray) do (Rtg.GetValue ('libraries') as TJsonArray).Add(I as TJsonObject); //开始判断libraries，此时应该是增添到原版里面，而不是替换。
+  try //使用try语句判断gaijson里面是否有arguments-&gt;game键，如果有，则执行，反之则不执行。
+    for var I in ((Rty.GetValue('arguments') as TJsonObject).GetValue('game') as TJsonArray) do //开始判断
+      ((Rtg.GetValue('arguments') as TJsonObject).GetValue('game') as TJsonArray).Add(I.GetValue&lt;String&gt;); //这里直接用GetValue&lt;String&gt;，且从长开始拼接。
+  except end;
+  try  //再以同样的方式判断是否有jvm参数，如果有，则开始增添而不是替换。
+    for var I in ((Rty.GetValue('arguments') as TJsonObject).GetValue('jvm') as TJsonArray) do
+      ((Rtg.GetValue('arguments') as TJsonObject).GetValue('jvm') as TJsonArray).Add(I.GetValue&lt;String&gt;);
+  except end;
+  try //最后一步，开始判断里面是否有minecraftArguments键，用于适配1.12.2
+    var ma := Rty.GetValue('minecraftArguments').Value;
+    Rtg.RemovePair('minecraftArguments'); //如果有，则删掉原键增添新键，反之则跳过。
+    Rtg.AddPair('minecraftArguments', ma);
+  except end;
+  result := Rtg.ToString; //将最后的gaijson转成的Json对象使用ToString变成字符串后直接返回。
+end;
+</code></pre>
+<p>当然了，上面这一步代码，我感觉我是有点当时的年少有为，因为我直到编写这套教程的时候，我才忽然意识到，<font color=blue>其实上面的两个参数的代码可以直接以TJsonObject类型传入，而不是用字符串形式传入，然后返回值其实也是可以用Json对象返回的</font>，但既然写都写了，也懒得改了。</p>
+<p>好了，那么我们写完这几个函数之后，我们就应该开始思考，我们应该怎么去使用这两个函数了，那么如何使用这两个函数呢？我们下章教程再见分晓。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../FirstChapter/GetCpLibraries.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../FirstChapter/LaunchGame/LaunchIntro.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../FirstChapter/GetCpLibraries.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../FirstChapter/LaunchGame/LaunchIntro.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>离线登录 - Let us Make A Minecraft Launcher</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">导论</a></li><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../ProgrammingLanguage.html"><strong aria-hidden="true">1.</strong> 编程语言的选择</a></li><li class="chapter-item expanded "><a href="../LaunchPrinciple.html"><strong aria-hidden="true">2.</strong> 启动原理</a></li><li class="chapter-item expanded "><a href="../FirstChapter/intro.html"><strong aria-hidden="true">3.</strong> 第一章：启动游戏</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../FirstChapter/LaunchArguments.html"><strong aria-hidden="true">3.1.</strong> 讲解启动参数</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetVersionFolder.html"><strong aria-hidden="true">3.2.</strong> 如何获取versions文件夹</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetJVMAndArgument.html"><strong aria-hidden="true">3.3.</strong> 如何获取jvm、game参数</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetCpLibraries.html"><strong aria-hidden="true">3.4.</strong> 如何获取cp-library值</a></li><li class="chapter-item expanded "><a href="../FirstChapter/SupportInheritsFrom.html"><strong aria-hidden="true">3.5.</strong> 支持inheritsFrom下的MC</a></li><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/LaunchIntro.html"><strong aria-hidden="true">3.6.</strong> 启动游戏！</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/ReplaceTemplate.html"><strong aria-hidden="true">3.6.1.</strong> 替换字符串模板并启动游戏</a></li><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/UnzipNative.html"><strong aria-hidden="true">3.6.2.</strong> 解压Natives文件</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../SecondChapter/Intro.html"><strong aria-hidden="true">4.</strong> 第二章：账号部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../SecondChapter/OfflineLogin.html" class="active"><strong aria-hidden="true">4.1.</strong> 离线登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/MicrosoftLogin.html"><strong aria-hidden="true">4.2.</strong> 微软登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/OAuthLogin.html"><strong aria-hidden="true">4.3.</strong> 微软OAuth登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/AuthlibInjectorLogin.html"><strong aria-hidden="true">4.4.</strong> Authlib-Injector第三方登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/RefreshLogin.html"><strong aria-hidden="true">4.5.</strong> 刷新账号</a></li><li class="chapter-item expanded "><a href="../SecondChapter/OfflineSkin.html"><strong aria-hidden="true">4.6.</strong> 离线登录皮肤</a></li></ol></li><li class="chapter-item expanded "><a href="../ThirdChapter/Intro.html"><strong aria-hidden="true">5.</strong> 第三章：下载部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ThirdChapter/GetMCData.html"><strong aria-hidden="true">5.1.</strong> 获取MC元数据</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/DownloadLibraries.html"><strong aria-hidden="true">5.2.</strong> 下载libraries</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/DownloadAssets.html"><strong aria-hidden="true">5.3.</strong> 下载assets</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/SupportThread.html"><strong aria-hidden="true">5.4.</strong> 支持多线程下载</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/LaunchDownloadMC.html"><strong aria-hidden="true">5.5.</strong> 启动自己下载过后的MC</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/Intro.html"><strong aria-hidden="true">5.6.</strong> 模组加载器</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/SupportFabricQuilt.html"><strong aria-hidden="true">5.6.1.</strong> 支持Fabric、Quilt自动安装</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/SupportNeoForge.html"><strong aria-hidden="true">5.6.2.</strong> 支持NeoForge自动安装</a></li></ol></li><li class="chapter-item expanded "><a href="../ThirdChapter/CompleteMissingFiles.html"><strong aria-hidden="true">5.7.</strong> 补全MC的缺失文件</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/CheckFileHash.html"><strong aria-hidden="true">5.8.</strong> 校验文件的hash值</a></li></ol></li><li class="chapter-item expanded "><a href="../TutorWriteTime.html"><strong aria-hidden="true">6.</strong> 教程书写时间</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Let us Make A Minecraft Launcher</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="本章教会大家如何将账号信息保存到外部文件"><a class="header" href="#本章教会大家如何将账号信息保存到外部文件">本章教会大家如何将账号信息保存到外部文件</a></h1>
+<h3 id="注意本章可能会稍微有点长因为干货比较多我们需要搭建一个账号部分的框架"><a class="header" href="#注意本章可能会稍微有点长因为干货比较多我们需要搭建一个账号部分的框架">注意：本章可能会稍微有点长，因为干货比较多，我们需要搭建一个账号部分的框架。</a></h3>
+<h3 id="在后期微软登录和外置登录之时会因为这一期而大大减少了篇幅量"><a class="header" href="#在后期微软登录和外置登录之时会因为这一期而大大减少了篇幅量">在后期，微软登录和外置登录之时，会因为这一期而大大减少了篇幅量。</a></h3>
+<p>其实，在之前的教程中，我们做的就是支持离线登录，并且当时，我们使用的UUID为【0123456789abcdef0123456798abcdef】这么个32位无符号小写uuid，但是，众所周知，肯定不止这么一种uuid的拼法。</p>
+<p>据统计，这么一个32位uuid的拼法，在uuid诞生那一年，其制作者就说过：UUID是一种极为安全的玩家身份验证渠道，以我们现在的时间来说，就算每一纳秒生成一个UUID，也需要将近一百亿年之后，UUID才会被用完。</p>
+<p>这种身份验证甚至被用在了二维码上，因此，我们根本无需担心世界上的二维码或者是UUID会被用完。也更不用杞人忧天的想到自己的UUID可能会被别人给盗用。</p>
+<p>好吧，我们开始写代码吧：</p>
+<p>首先，右键IDE右侧栏上的exe，然后点击Add New，然后新建一个VCL窗体。</p>
+<p>窗体样式大概是这样的：</p>
+<p><img src="./image/OfflineForm.png" alt="离线登录窗体样式" /></p>
+<p>然后，我们点击Ctrl+S键保存这个窗体，然后给该窗体文件命名为【AccountForm.pas】即可。</p>
+<p>然后，我们再在主窗口上，建立一个这样的按钮：</p>
+<p><img src="./image/MainForm.png" alt="主窗口样式" /></p>
+<p>双击这个按钮，进入代码编辑视图，我们首先第一步，需要滑到最顶端，引用一个单元文件，单元文件名自然就是我们的窗体文件啦！</p>
+<p>在以后每次大家新建窗体时，如果需要在别的窗体中打开另一个窗体，就必须要在这个窗体里面引用那个窗体的头文件：</p>
+<pre><code class="language-cs">uses
+  AccountForm;
+</code></pre>
+<p>使用完毕之后，我们就可以回到按钮点击事件，在里面写上这么一段话</p>
+<pre><code class="language-cs">procedure TForm1.Button2Click(Sender: TObject);
+begin
+  Form2.ShowModal; //Form2指的是账号窗体属性中的name值，多半是唯一的。
+end;
+</code></pre>
+<p>是的，只需要Show一次，就可以了！此时，你可能会问：为什么不用像C#那样new一次【指调用一次Create方法】后，才能显示呢？</p>
+<p>其实，Delphi已经帮我们做好工作了！右键右侧文件树状图上面的exe，然后点击View Source，你就能看见，Delphi在单元执行主线程中，已经为我们使用CreateForm创建过一个窗体了！我们只需要使用其内部的Show方法即可！</p>
+<p>然后嘛，让我来解释一下Show和ShowMadel方法的区别，<font color=blue>首先，Show是指使用一个额外线程启动这个窗口，意思就是不锁定住主窗口启动。ShowModal的意思是锁定住主窗口，利用主线程直接开始执行窗体代码的意思。该种方式与C#中的ShowDialog一致。</font></p>
+<p>然后，我们就要正式的在AccountForm里面敲代码了！</p>
+<p>首先，我们需要敲出离线登录的代码。按照我们上述的布局，我们点击【添加账号】的按钮，进入按钮点击事件。</p>
+<p>让我们首先介绍一下这个按钮的主要功能吧！这个按钮的主要功能就是将账号的名称添加进上方的所有账号的下拉框里面。该按钮同样适配于微软登录、外置登录。同样的，我们需要置一个单选框，用于给玩家选择应该使用哪种登录方式。</p>
+<p>进入点击事件，我们开始写代码咯！【ps：这里的添加按钮名称为Button2】，其余的按钮我会在之后挨个和大家说的。</p>
+<pre><code class="language-cs">procedure TForm2.Button2Click(Sender: TObject);
+var
+  uid: TGuid; //在函数开头声明一个uid。
+begin
+  if RadioButton1.Checked then begin //该处直接判断离线登录的单选框是否选上。
+    if (Edit1.Text = '') or (not TRegex.IsMatch(Edit1.Text, '^[A-Z0-9a-z]')) or (Length(Edit1.Text) &gt; 16) or (Length(Edit1.Text) &lt; 3) then // 如果玩家名称为空
+    begin //对玩家名称进行判断。
+      messageBox(Handle, '你的离线登录名称并不理想，输入错误！请不要输入中文，也不要超过16个字符！不要为空。', '错误警告', MB_ICONERROR);
+      exit;
+    end;
+    var tuid: String := Edit2.Text; //获取UUID编辑框的内容。
+    tuid := tuid.ToLower; //对其进行小写。【如果有的话】
+    if (tuid = '') then begin //判断其是否为空（为空则随机生成一个UUID）
+      CreateGuid(uid); //如果为空，则为uid变量初始化
+      tuid := GuidToString(uid).Replace('{', '').Replace('}', '').Replace('-', '').ToLower; //对tuid赋值，将Guid变成String后赋值上去。
+    end;
+    if not TRegex.IsMatch(tuid, '^[a-f0-9]{32}') then begin //用正则表达式判断tuid是否符合32位无符号UUID
+      messageBox(Handle, '你的离线登录UUID输入错误，请输入一串长32位无符号UUID。或者不输入等待随机生成', '错误警告', MB_ICONERROR); //如果不是，则退出方法。
+      exit;
+    end;
+    //将所有目标添加到配置文件，写入Json
+    (AccountJson.GetValue('account') as TJsonArray).Add(TJsonObject.Create
+      .AddPair('type', 'offline')
+      .AddPair('name', Edit1.Text)
+      .AddPair('uuid', tuid)
+    ); //如果仔细看这一行，我们就会发现，我们将配置文件是写在这里的：
+    (*
+        Delphi里面使用这种符号来进行多行注释。
+        {
+            "account": [
+                {
+                    "type": "offline",
+                    "name": "&lt;玩家名称&gt;"
+                    "uuid": "&lt;玩家UUID&gt;"
+                }
+            ]
+        }
+    *) 
+    //我们发现，这个Json不是一个列表形式，而是在一个对象中建立了一个名为account为键名的列表，然后在列表中新键type和name啥啥的。
+    //这个键我们稍后再说，稍后我会对其进行讲解。
+    ComboBox1.ItemIndex := ComboBox1.Items.Add(Concat(Edit1.Text, '（离线）')); //给下拉框添加元素，顺便赋值给最终值。
+    Edit1.Text := '';//给Edit设置为空
+    Edit2.Text := '';
+    messagebox(Handle, '添加成功！', '添加成功', MB_OK+MB_ICONINFORMATION);
+  end; //后期微软登录之时，我们只需要把这个分号去掉，然后在下面写上 else if RadioButton2.Checked then 即可。
+end;
+</code></pre>
+<p>在上述代码中，我们用了一个正则表达式来匹配UUID是否真的为32位无符号UUID。</p>
+<p>该正则表达式需要引用Delphi的一个单元：<font color=red>【本次使用别的Form，在你不确定自己需要引用哪些单元文件的时候，你需要将MainForm里的单元文件全部引用到该Form里面。】</font></p>
+<pre><code class="language-cs">uses
+  RegularExpressions;
+</code></pre>
+<p>然后呢，还有一件事，下面有个AccountJson，这个是从哪里来的呢？哦！我们在implementation的<font color=red>下方</font>，建立一个AccountJson，这个Json文件作为我们的账号配置Json。</p>
+<p>我们需要在其中新建一个变量，见下</p>
+<pre><code class="language-cs">implementation
+
+var
+  AccountJson: TJsonObject;
+</code></pre>
+<p>但此时，我们还不能直接使用它，因为它只是一个没有初始化过的变量。我们需要做的，就是在FormCreate中为这个变量new一次。</p>
+<p>回到窗体视图，双击窗体，我们便可以打开FormCreate事件。</p>
+<p>在里面这么写即可：</p>
+<pre><code class="language-cs">procedure TForm2.FormCreate(Sender: TObject);
+begin
+  AccountJson := TJsonObject.Create;
+end;
+</code></pre>
+<p>写下这么一段话即可对AccountJson进行初始化操作。之后我们便可以对AccountJson进行自由加键删键处理。</p>
+<p>如果你发现上述代码报错，那绝大概率是你的JSON单元没有引用，你需要去看上面的介绍。</p>
+<p>然后，我们就需要去对这个Json文件进行处理。在上面，我们为其添加了新键。</p>
+<p>接着，我们便可以回到主界面，双击保存并退出按钮，然后进入事件【我的按钮name是Button4】开始写下保存账号信息的代码：</p>
+<pre><code class="language-cs">procedure TForm2.Button4Click(Sender: TObject);
+begin
+  SaveFileToOutside(Concat(ExtractFilePath(Application.ExeName), 'launcher\AccountJson.json'), AccountJson.Format); 
+  Close; //这里使用了Format函数，此为将Json字符串进行格式化后保存到外部文件。我们还使用了Application.ExeName，这个意思指的是获取exe当前目录。
+end;
+</code></pre>
+<p>将上述文件保存出去即可。其中，我们使用了一个新的函数，名为SaveFileToOutside，这个函数是一个自制函数，用途是将内容字符串保存到外部文件。现在，我们回到MainForm中，书写这个函数吧！</p>
+<pre><code class="language-cs">procedure SaveFileToOutside(path, content: string);
+begin
+  var ss := TStringStream.Create('', TEncoding.UTF8, False);//定义一个流
+  if not DirectoryExists(ExtractFilePath(path)) then ForceDirectories(ExtractFilePath(path));//判断文件夹是否存在，如果不存在则强制生成一个文件夹。
+  try
+    ss.WriteString(content); //写入字符串进流
+    ss.SaveToFile(path); //将流保存到外部文件。
+  finally
+    ss.Free;
+  end;
+end;
+
+</code></pre>
+<p>然后，还是在implementation<font color=red>下面</font>写上这个函数。</p>
+<p>此时，大家可能会发现在AccountForm中，还是无法引用这个函数啊？那是因为我们还没有引用这个MainForm文件呢！</p>
+<p>让我们在implementation下方写上这串代码：</p>
+<pre><code class="language-cs">implementation
+
+uses
+  MainForm;
+</code></pre>
+<p>即可使用了！</p>
+<p>然后，我们双击FormCreate，我们需要在该窗口刚刚创建之时，就立刻对Account支持，我们需要判断其文件是否存在，如果存在，则加载Json，如果不存在，则抛出报错，初始化Json</p>
+<pre><code class="language-cs">procedure TForm2.FormCreate(Sender: TObject);
+begin
+  AccountJson := TJsonObject.Create;
+  if not FileExists(Concat(ExtractFilePath(Application.ExeName), 'launcher\AccountJson.json')) then begin //给Json变量初值附上一个account的JsonArray
+    AccountJson.AddPair('account', TJsonArray.Create); //是的，直接在这里初始化account键。
+    var j := AccountJson.Format;  //将Json格式化并导出
+    SaveFileToOutside(Concat(ExtractFilePath(Application.ExeName), 'launcher\AccountJson.json'), j); //保存至外部文件。
+  end else begin //如果有则执行
+    var j := GetOutsideDocument(Concat(ExtractFilePath(Application.ExeName), 'launcher\AccountJson.json')); //获取外部文件的AccountJson内容，再将其转换成Json对象。
+    AccountJson := TJsonObject.ParseJSONValue(j) as TJsonObject; //给Account附上初值。
+  end;
+  try //以下代码是：为下拉框添加进元素。
+    for var I in (AccountJson.GetValue('account') as TJsonArray) do //遍历Json数组
+    begin //如果找到的type为offline，那么添加为离线登录，如果检测到microsoft，那么添加为微软正版登录。
+      var tpe := I.GetValue&lt;String&gt;('type'); //获取type值
+      if tpe = 'offline' then ComboBox1.Items.Add(I.GetValue&lt;String&gt;('name')) //如果是离线，则在下拉框中添加。后期可以直接在下面输入else microsoft的！
+
+    end;
+  except
+    tp := -1;
+    ComboBox1.ItemIndex := -1;
+  end;
+end;
+</code></pre>
+<p>这样，我们就已经做好了在程序一旦启动之时，立刻就给我们的程序初始化所有的账号信息了。</p>
+<p>然后，下一步，我们需要制作确认登录的功能，这个功能很简单，请看代码：功能晚点会说【我的确认登录按钮是Button1】，在窗体视图双击按钮进入代码编辑：</p>
+<pre><code class="language-cs">procedure TForm2.Button1Click(Sender: TObject);
+begin
+  var pln := ((AccountJson.Values['account'] as TJsonArray)[ComboBox1.ItemIndex] as TJsonObject).GetValue('name').Value; //通过ComboBox1的ItemIndex属性，成功获取到目前登录的账号玩家名称。
+  tp := ComboBox1.ItemIndex; //tp是一个全局变量，专门获取玩家名称。
+  messagebox(Handle, '确认成功！', '确认成功', MB_OK); //弹出一个信息框说明确认成功
+end;
+</code></pre>
+<p>其中，有一个名为tp的变量，它其实是一个全局变量，用于存储玩家当前选择了第几号账号。例如我选择的是1号，那么这个变量将存储0，如果没有确认账号，则这个变量将存储-1。</p>
+<p><font color=blue>其实，这个地方我们可以不用按钮来写的，我们可以直接双击上面的ComboBox下拉框，然后写上上面这一串的，</font><font color=red>然后messagebox我们也可以去掉的！</font></p>
+<p><font color=green>由于此篇教程过于古老，我不太可能在没更新完下面几章节时返回来修改原有目录，而且我的启动器示例也有所更改，我不太会重新删掉控件从而为了适配老期教程，因此，大家完全可以动动自己的小脑袋，自己动手实现自己想要的功能哟！</font></p>
+<p>然后，我们需要在全局变量中定义一个这种变量【由于这个数字，我们并没有将其保存到外部文件，大家也当然可以将其保存到外部，这样可以在打开启动器的同时，自动装载玩家选择的账号，同时在账号部分窗口创建的时候，也同样将下拉框的ItemIndex属性，赋值位于这个变量的外部值哦！】</p>
+<p>AccountForm.pas</p>
+<pre><code class="language-cs">var
+  Form2: TForm2;
+  tp: Integer = -1; //定义一个初值。
+
+implementation
+</code></pre>
+<p>【这里由于篇幅原因，就不实现上述保存到外部了。（视频教程里也照样没有保存。）】</p>
+<p>然后然后，我们回到MainForm中，我们需要改改启动游戏的逻辑咯！</p>
+<p>首先，去除全局常量UserName，然后在Button1Click中这样写</p>
+<pre><code class="language-cs">procedure TForm1.Button1Click(Sender: TJsonObject);
+var
+  PlayerName: String;
+  PlayerUUID: String;
+  PlayerType: String;
+  PlayerAcTo: String;
+  PlayerAuth: String; //这里需要添加一个额外变量，这个变量后期我们在添加Authlib-Injector时会说道！
+begin
+  ... //前面省略
+  var res := lch.SelectParam(root); //成功获取到拼接完成后的json文件。
+
+  try
+    var JsonAbout := TJsonObject.ParseJSONValue(GetOutsideDocument(Concat(ExtractFilePath(Application.ExeName), 'launcher\AccountJson.json'))) as TJsonObject; //获取外部json文件
+    var chooseAbout := (JsonAbout.GetValue('account') as TJsonArray)[tp] as TJsonObject; //获取当前选择的代码块
+    var typetemp := chooseAbout.GetValue('type').Value; //获取选择的type键
+    if typetemp = 'offline' then begin //如果type键等于offline，则执行。
+      PlayerName := chooseAbout.GetValue('name').Value; //设置为name
+      PlayerUUID := chooseAbout.GetValue('uuid').Value; //设置为uuid
+      PlayerAcTo := PlayerUUID; //accessToken等于uuid
+      PlayerType := 'Legacy'; //type为Legacy。
+      PlayerAuth := ''; //这里当然要设置为空啦！后期再说！
+    end; //后期直接在这里接上microsoft等就可以了！
+  except
+    messagebox(Handle, '你还暂未选择一个账号，请去选择一次吧！', '暂未选择', MB_ICONERROR);
+    exit;
+  end;
+
+  //在这两行代码的中间，新建一个这样的代码块
+  if not lch.UnzipNatives(root, MinecraftPath, spath) then begin
+  ... //后面省略
+  .Replace('${auth_player_name}', PlayerName)
+  .Replace('${auth_uuid}', PlayerUUID) 
+  .Replace('${auth_access_token}', PlayerActo)
+  .Replace('${user_type}', PlayerType) 
+  .Replace('${authlib_injector_param}', PlayerAuth) //这里还是额外的参数噢！后期再说！
+</code></pre>
+<p>当我们写好上述代码，并且改好之后，我们就可以正常的打开启动器了，然后尝试一下，进行一次离线登录MC吧！</p>
+<p>好了好了，既然如此，你已经可以正常的启动Minecraft并应用离线登录了，但是文章当中还有很多问题没有体现出来，这些问题的修复就留给大家当作作业啦！大家可以自行去修复这些问题哦！</p>
+<p>但是，切记一点，由于我的AccountJson是保存在exe目录下，因此这种情况有很高的风险性会被人家盗取AccessToken，因此，我们也必须将AccountJson保存到一个安全的地方。【例如AppData\Roaming】目录下，或者Local目录下。</p>
+<p>好了，话就说这么多，尽情期待下一章吧！</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../SecondChapter/Intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../SecondChapter/MicrosoftLogin.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../SecondChapter/Intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../SecondChapter/MicrosoftLogin.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

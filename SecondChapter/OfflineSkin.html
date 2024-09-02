@@ -1,0 +1,456 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>离线登录皮肤 - Let us Make A Minecraft Launcher</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">导论</a></li><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../ProgrammingLanguage.html"><strong aria-hidden="true">1.</strong> 编程语言的选择</a></li><li class="chapter-item expanded "><a href="../LaunchPrinciple.html"><strong aria-hidden="true">2.</strong> 启动原理</a></li><li class="chapter-item expanded "><a href="../FirstChapter/intro.html"><strong aria-hidden="true">3.</strong> 第一章：启动游戏</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../FirstChapter/LaunchArguments.html"><strong aria-hidden="true">3.1.</strong> 讲解启动参数</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetVersionFolder.html"><strong aria-hidden="true">3.2.</strong> 如何获取versions文件夹</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetJVMAndArgument.html"><strong aria-hidden="true">3.3.</strong> 如何获取jvm、game参数</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetCpLibraries.html"><strong aria-hidden="true">3.4.</strong> 如何获取cp-library值</a></li><li class="chapter-item expanded "><a href="../FirstChapter/SupportInheritsFrom.html"><strong aria-hidden="true">3.5.</strong> 支持inheritsFrom下的MC</a></li><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/LaunchIntro.html"><strong aria-hidden="true">3.6.</strong> 启动游戏！</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/ReplaceTemplate.html"><strong aria-hidden="true">3.6.1.</strong> 替换字符串模板并启动游戏</a></li><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/UnzipNative.html"><strong aria-hidden="true">3.6.2.</strong> 解压Natives文件</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../SecondChapter/Intro.html"><strong aria-hidden="true">4.</strong> 第二章：账号部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../SecondChapter/OfflineLogin.html"><strong aria-hidden="true">4.1.</strong> 离线登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/MicrosoftLogin.html"><strong aria-hidden="true">4.2.</strong> 微软登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/OAuthLogin.html"><strong aria-hidden="true">4.3.</strong> 微软OAuth登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/AuthlibInjectorLogin.html"><strong aria-hidden="true">4.4.</strong> Authlib-Injector第三方登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/RefreshLogin.html"><strong aria-hidden="true">4.5.</strong> 刷新账号</a></li><li class="chapter-item expanded "><a href="../SecondChapter/OfflineSkin.html" class="active"><strong aria-hidden="true">4.6.</strong> 离线登录皮肤</a></li></ol></li><li class="chapter-item expanded "><a href="../ThirdChapter/Intro.html"><strong aria-hidden="true">5.</strong> 第三章：下载部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ThirdChapter/GetMCData.html"><strong aria-hidden="true">5.1.</strong> 获取MC元数据</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/DownloadLibraries.html"><strong aria-hidden="true">5.2.</strong> 下载libraries</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/DownloadAssets.html"><strong aria-hidden="true">5.3.</strong> 下载assets</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/SupportThread.html"><strong aria-hidden="true">5.4.</strong> 支持多线程下载</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/LaunchDownloadMC.html"><strong aria-hidden="true">5.5.</strong> 启动自己下载过后的MC</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/Intro.html"><strong aria-hidden="true">5.6.</strong> 模组加载器</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/SupportFabricQuilt.html"><strong aria-hidden="true">5.6.1.</strong> 支持Fabric、Quilt自动安装</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/SupportNeoForge.html"><strong aria-hidden="true">5.6.2.</strong> 支持NeoForge自动安装</a></li></ol></li><li class="chapter-item expanded "><a href="../ThirdChapter/CompleteMissingFiles.html"><strong aria-hidden="true">5.7.</strong> 补全MC的缺失文件</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/CheckFileHash.html"><strong aria-hidden="true">5.8.</strong> 校验文件的hash值</a></li></ol></li><li class="chapter-item expanded "><a href="../TutorWriteTime.html"><strong aria-hidden="true">6.</strong> 教程书写时间</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Let us Make A Minecraft Launcher</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="离线皮肤适配原理"><a class="header" href="#离线皮肤适配原理">离线皮肤适配原理</a></h1>
+<p>众所周知，在22w45a以上版本，Mojang更新了9种离线皮肤，其中包含了Sunny、Efe等名字的皮肤。然后我们应该如何适配这个新特性呢？</p>
+<h2 id="在此之前我觉得我有必要来和各位启动器开发者们说一件事"><a class="header" href="#在此之前我觉得我有必要来和各位启动器开发者们说一件事">在此之前，我觉得我有必要来和各位启动器开发者们说一件事：</a></h2>
+<p>Mojang给我们提供了一种进入游戏时验证玩家身份唯一性的UUID值，如果进入同一个世界，但是UUID不一致，可能就会导致物品栏内的物品都不见。</p>
+<p>如果进入的是正版服务器，则可能会导致玩家的所有道具全部删除等状态。即使如此，我们还会发现，那么如果是离线服务器呢？</p>
+<p>离线服务器是根据玩家的UserName来在服务端创建一个ServerUUID，只要这个服务器不重启，或是不关闭，则无论玩家在哪台机子使用任意的客户端UUID，当使用该<strong>名称</strong>时，总是会获取玩家上次背包中的所有物品。</p>
+<p>还有一件事，那就是正版用户使用的UUID，这个UUID由Microsoft独立提供的一个身份验证的UUID，也就是说这个UUID为你独特的UUID，所有人无法与你的重合。</p>
+<p>那假如我使用离线登录，但是我的UUID填入某个正版用户的UUID，那该怎么办呢？</p>
+<p>很简单，你会获取到该用户的正版皮肤与正版披风，仅此而已。我们先来看看PCL2是如何通过玩家正版用户名获取到正版皮肤的！</p>
+<p>点击PCL2的设置 -&gt; 游戏 -&gt; 离线皮肤 -&gt; 正版皮肤单选框，然后在里面输入【Zi__Min】，现在再回到你的PCL2主界面，选择离线登录，随便输入一个用户名，然后此时，你们会不会发现，自己的头像被更改啦？？</p>
+<p>这就是Mojang对于UUID这个对于<strong>全球</strong>玩家唯一的统一标识符所代表的重要性了吧！</p>
+<p>还有一种特殊的，那就是第三方外置登录，Authlib-Injector，这个是通过劫持Mojang与正版服务器的通讯，将其导入进自己的服务器里进行识别皮肤的，因此里面的UUID其实并不作为Mojang官方服务器里的UUID。这个与我们下面教的无关。</p>
+<h2 id="下面我们开始正式教如何适配离线皮肤"><a class="header" href="#下面我们开始正式教如何适配离线皮肤">下面我们开始正式教如何适配离线皮肤</a></h2>
+<p>我们可以在我们的离线登录界面里设置一个下拉框，这个下拉框里面有【随机、Steve、Alex】等一堆设置，当然，粗细手臂的玩家我们也要设置噢！</p>
+<p>具体如何操控UUID可以看看我发的<a href="https://www.mcbbs.net/thread-1447102-1-1.html">这篇帖子</a>，然后看看tdiant是怎么回答的！</p>
+<p>通过上面那篇帖子，我们很容易可以看出，Mojang通过解析UUID将其转成一个hashCode，随后通过某种特殊的解析，解析出Minecraft的9种离线皮肤。</p>
+<p>我们可以写一个这样的函数，用于将玩家输入的UUID转换成hashCode，当然，此处如果是专门使用Java制作启动器的作者们可以跳过这一段。我这里所针对的是【在自带的语言中没有UUID.hashCode这个方法的】。</p>
+<p>我们用Delphi写一个下列函数</p>
+<pre><code class="language-cs">//用UUID强转成HashCode。（接受一个参数为UUID，类型是String）
+function UUIDToHashCode(UUID: string): Int64; //返回一个long类型的数据，我这里用Int64代替。
+begin
+  result := -1; //先设置返回值为-1
+  if TRegex.IsMatch(UUID, '^[a-f0-9]{32}') then begin //这里先使用正则表达式，判断输入的UUID是否符合预期。如果符合，则往下执行，反之直接返回-1。
+    var most := UUID.Substring(0, 16); //将该UUID从中间切开，第一个为UUID的前半部分。
+    var least := UUID.Substring(16, 16); //这个为UUID的下半部分。
+    var mostbin := ''; //设置一个前半部分的。
+    var leastbin := ''; //设置一个后半部分的。
+    for var I in most do begin  //用forEach对UUID前半部分遍历。
+      if I = '0' then mostbin := mostbin + '0000' //如果循环到0，则mostbin加一个0000
+      else if I = '1' then mostbin := mostbin + '0001' //以下亦然
+      else if I = '2' then mostbin := mostbin + '0010'
+      else if I = '3' then mostbin := mostbin + '0011'
+      else if I = '4' then mostbin := mostbin + '0100'
+      else if I = '5' then mostbin := mostbin + '0101'
+      else if I = '6' then mostbin := mostbin + '0110'
+      else if I = '7' then mostbin := mostbin + '0111'
+      else if I = '8' then mostbin := mostbin + '1000'
+      else if I = '9' then mostbin := mostbin + '1001'
+      else if I = 'a' then mostbin := mostbin + '1010'
+      else if I = 'b' then mostbin := mostbin + '1011'
+      else if I = 'c' then mostbin := mostbin + '1100'
+      else if I = 'd' then mostbin := mostbin + '1101'
+      else if I = 'e' then mostbin := mostbin + '1110'
+      else if I = 'f' then mostbin := mostbin + '1111'
+    end;
+    for var I in least do begin  //这里遍历的是后半部分。
+      if I = '0' then leastbin := leastbin + '0000'
+      else if I = '1' then leastbin := leastbin + '0001'
+      else if I = '2' then leastbin := leastbin + '0010'
+      else if I = '3' then leastbin := leastbin + '0011'
+      else if I = '4' then leastbin := leastbin + '0100'
+      else if I = '5' then leastbin := leastbin + '0101'
+      else if I = '6' then leastbin := leastbin + '0110'
+      else if I = '7' then leastbin := leastbin + '0111'
+      else if I = '8' then leastbin := leastbin + '1000'
+      else if I = '9' then leastbin := leastbin + '1001'
+      else if I = 'a' then leastbin := leastbin + '1010'
+      else if I = 'b' then leastbin := leastbin + '1011'
+      else if I = 'c' then leastbin := leastbin + '1100'
+      else if I = 'd' then leastbin := leastbin + '1101'
+      else if I = 'e' then leastbin := leastbin + '1110'
+      else if I = 'f' then leastbin := leastbin + '1111'
+    end;
+    //此时，mostbin和leastbin就是该UUID前半部分与后半部分的二进制，
+    var xor1 := ''; //设立一个临时变量。
+    for var I := 1 to mostbin.Length do begin //这个循环是对上述两个进行xor计算。
+    //具体xor是什么，请自行百度。
+      if mostbin[I] = leastbin[I] then begin
+        xor1 := xor1 + '0';
+      end else begin
+        xor1 := xor1 + '1';
+      end;
+    end;
+    var mostx := xor1.Substring(0, 32); //这里对第一次xor出来的值再次切割成两半。
+    var leastx := xor1.Substring(32, 32);
+    var xor2 := ''; //再设立一个临时变量。
+    for var I := 1 to mostx.Length do begin //再做一次xor计算。
+      if mostx[I] = leastx[I] then begin
+        xor2 := xor2 + '0';
+      end else begin
+        xor2 := xor2 + '1';
+      end;
+    end;
+    var ten: Int64 := 0; //最后将该二进制数据转换成10进制，用long类型的接收。
+    for var I := 1 to xor2.Length do begin
+      if xor2[I] = '1' then begin
+        ten := ten + Trunc(IntPower(2, xor2.Length - I)); //这里可能写的有点高血压，不过也差不多。。
+      end;
+    end;
+    result := ten; //将最后的10进制当作返回值返回。
+  end;
+end;
+</code></pre>
+<p>好了，那么上面的UUIDToHashCode，只是一个将UUID转换成Int数字的一事。但是对于一个UUID的可能性远远比long类型所能装得下的数据来说，远远的超过了，因此总有至少n个UUID转换成long类型的数据是一样的。这点不可否认。</p>
+<p>随后，我们来看看我们应该如何通过这个函数，来生成一个我们自己的皮肤解析吧！</p>
+<p>首先，我们进入AccountForm这个类，然后我们新建一个函数，名为UUIDToAvatar，这个的意思就是当我们选中下拉框中的任意元素时，所可能触发的事件。</p>
+<p>先在我们自定义的下拉框里设置这么几个元素【可以选择按照顺序，也可以选择不按照】：</p>
+<pre><code>alex-slim
+ari-slim
+efe-slim
+kai-slim
+makena-slim
+noor-slim
+steve-slim
+sunny-slim
+zuri-slim
+alex-bold
+ari-bold
+efe-bold
+kai-bold
+makena-bold
+noor-bold
+steve-bold
+sunny-bold
+zuri-bold
+</code></pre>
+<p>其中，上述对应的，就是一个顺序。从alex开始，一直往下，所得到的index，就是我们的hashCode除以18得到的【余数】所对应的index。</p>
+<p>我们直接开始上代码吧：</p>
+<pre><code class="language-cs">//根据序号获取UUID。
+function TForm3.AvatarToUUID(num: Integer): String;
+var
+  uid: TGuid;  //首先置一个UUID的变量。
+begin
+  while true do begin //使用循环遍历通过的num是否符合UUID。
+    CreateGuid(uid); //为UUID初始化。
+    var str := GuidToString(uid).Replace('{', '').Replace('}', '').Replace('-', '').ToLower; 
+    //这里使用的是使用UUIDToHashCode对18进行取余操作，如果取出的余数为选择的num，则直接返回str，如果不是，则继续循环。
+    if (UUIDToHashCode(uuid) mod 18) = num then begin
+      result := str;
+      break;
+    end;
+    //如果不是，则继续循环。
+  end;
+end;
+</code></pre>
+<p>好了，那么上述就是通过序号获取UUID。我们设立了一个参数，这个参数是Integer类型的，当然，我们是使用了UUIDToHashCode对18进行取余的。</p>
+<p>大多数的编程语言使用的应该是【%】这个符号进行取余。但是Delphi是用mod进行取余的，各位不必在意这些细节。</p>
+<p>那么我们应该如何使用这个AvatarToUUID呢？</p>
+<p>很简单，我们看看下拉框改变事件：</p>
+<pre><code class="language-cs">procedure TForm2.ComboBox2Change(Sender: TObject);
+begin
+  //这个Edit2指的是当初我们置下UUID那个输入框的。
+  Edit2.Text := AvatarToUUID(ComboBox2.ItemIndex);
+end;
+</code></pre>
+<p>随后，符合玩家选择的皮肤的UUID就正式被我们获取到了！我们只需要点击添加账号，将UUID保存到外部文件，随后我们启动游戏试试吧！！</p>
+<h2 id="下面开始教大家如何通过正版用户名来获取正版用户的uuid"><a class="header" href="#下面开始教大家如何通过正版用户名来获取正版用户的uuid">下面开始教大家如何通过正版用户名来获取正版用户的UUID。</a></h2>
+<p>我们很容易的就可以从wiki.vg里面，找到有关于mojang API的部分解说，其中有一段是通过api.mojang.com里面，通过正版用户的用户名来获取正版的UUID的。</p>
+<p>但是此时，我们会发现一个问题，我们无法获取用户的大头像，这里仅仅只是获取到正版用户的UUID，也就是说我们必须得进入游戏之后才能看到自己获取的用户皮肤。</p>
+<p>那么我们有什么API可以解决这件事吗？答案是有的！</p>
+<p>我们可以通过playerdb来获取正版用户的UUID以及大头像。</p>
+<p>我就用我自己的正版用户名来给大家做个示例吧：</p>
+<pre><code>GET https://playerdb.co/api/player/minecraft/rechalow
+
+GET https://playerdb.co/api/player/minecraft/&lt;正版用户名或正版UUID&gt;
+</code></pre>
+<p>这个playerdb网址不仅支持正版用户名输入，而且支持正版用户的UUID输入，也就是说如果对方只告诉了你UUID而不告诉你正版用户名，你依旧可以查询得到。</p>
+<pre><code class="language-json">{
+    "code": "player.found",
+    "message": "Successfully found player by given ID.",
+    "data": {
+        "player": {
+            "meta": {
+                "cached_at": 1697884012
+            },
+            "username": "Rechalow",
+            "id": "9b319bd5-2291-4c04-9017-60be25cf0331",
+            "raw_id": "9b319bd522914c04901760be25cf0331",
+            "avatar": "https://crafthead.net/avatar/9b319bd522914c04901760be25cf0331",
+            "name_history": []
+        }
+    },
+    "success": true
+}
+</code></pre>
+<p>我们很容易的就可以发现，这里面有我们的基本用户信息。</p>
+<p>我们也可以把上述API地址换成如下：</p>
+<pre><code>GET https://playerdb.co/api/player/minecraft/9b319bd522914c04901760be25cf0331
+</code></pre>
+<p>返回结果与上述一致。</p>
+<p>我们来挨个辨析里面的所有参数：</p>
+<div class="table-wrapper"><table><thead><tr><th>键值</th><th>描述</th></tr></thead><tbody>
+<tr><td>code</td><td>API返回代码，通常用于辨认此时用户获取到的是什么。</td></tr>
+<tr><td>message</td><td>API返回描述信息，用于描述此时获取到了什么。</td></tr>
+<tr><td>success</td><td>是否返回成功。通常用个if判断，如果API库里面没有这个正版用户名，则返回false</td></tr>
+<tr><td>data</td><td>返回的用户数据对象。</td></tr>
+<tr><td>data.player</td><td>玩家数据</td></tr>
+<tr><td>data.player.meta</td><td>玩家元数据，（我不知道里面是什么东西，如果有知道的，可以给我发issue。）</td></tr>
+<tr><td>data.player.username</td><td>玩家用户名</td></tr>
+<tr><td>data.player.id</td><td>玩家真实的UUID</td></tr>
+<tr><td>data.player.raw_id</td><td>玩家的无符号UUID</td></tr>
+<tr><td>data.player.avatar</td><td>玩家的大头像历史</td></tr>
+<tr><td>data.player.name_history</td><td>玩家的历史用户名【由于Mojang在API里去除了at时间戳，因此这个作废。】</td></tr>
+</tbody></table>
+</div>
+<p>上面的表格清晰的指出了上述API的所有返回信息是怎样的。</p>
+<p>下一步，我们将继续来看看如何在代码中获取上述API。<font color=red>【请注意，上述API确实为mojang公开的API，但并不代表玩家可以随时随地查看别的正版用户所更换的皮肤，请酌情适用。】</font></p>
+<p>首先，我们在离线登录旁边置一个按钮。名称为：【通过正版用户名称获取正版用户皮肤】，当然大家也可以自行选择如何置这个按钮。随后敲以下代码：</p>
+<p>由于篇幅关系，这里不再赘述如何直接获取正版用户大头像了，大家只需要知道该大头像是180x180像素的，大家自己用自己的语言内置的图像解析器来编写获取用户大头像吧！</p>
+<pre><code class="language-cs">procedure &lt;名称随便乱取啦……我也忘了是按钮几号啦……&gt;();
+begin
+  var a := GetWebText('https://playerdb.co/api/player/minecraft/' + Edit1.Text);
+  //先获取网址里的内容。
+  var uuid := (((TJSONObject.ParseJSONValue(a) as TJSONObject)
+      .GetValue('data') as TJSONObject)
+      .GetValue('player') as TJSONObject)
+      .GetValue('raw_id').Value;
+  Edit2.Text := uuid;
+end;
+</code></pre>
+<p>欸对，也就是这么简单。如果你还想有更高深的玩法的话，可以在窗口上设置一个图片框，随后在玩家离线登录的同时，获取该用户的大头像。<font color=orange>【请记住，这个地方是通过用户的UUID来获取头像，而不是仅仅通过用户名来获取，因为Minecraft最终解析皮肤不是通过Username来解析的。】</font>，如果success为true。则将该大头像放入图片框。如果success为false，则按照默认9种离线皮肤为玩家创建大头像。</p>
+<p>具体如何置图片框，这里不多赘述，大家自行准备！好了，话就说到这里，开始下一章吧！</p>
+<p><font color=red>请注意！上述方式仅适用于单人游戏，作者不保证该种方式是否可以用于多人联机。如果你在与朋友联机的时候，使用了上述自建的UUID方式，而未能正确获取到正确的正版皮肤，则不是作者的问题！</font></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../SecondChapter/RefreshLogin.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../ThirdChapter/Intro.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../SecondChapter/RefreshLogin.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../ThirdChapter/Intro.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

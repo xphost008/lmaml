@@ -1,0 +1,366 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>刷新账号 - Let us Make A Minecraft Launcher</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">导论</a></li><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../ProgrammingLanguage.html"><strong aria-hidden="true">1.</strong> 编程语言的选择</a></li><li class="chapter-item expanded "><a href="../LaunchPrinciple.html"><strong aria-hidden="true">2.</strong> 启动原理</a></li><li class="chapter-item expanded "><a href="../FirstChapter/intro.html"><strong aria-hidden="true">3.</strong> 第一章：启动游戏</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../FirstChapter/LaunchArguments.html"><strong aria-hidden="true">3.1.</strong> 讲解启动参数</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetVersionFolder.html"><strong aria-hidden="true">3.2.</strong> 如何获取versions文件夹</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetJVMAndArgument.html"><strong aria-hidden="true">3.3.</strong> 如何获取jvm、game参数</a></li><li class="chapter-item expanded "><a href="../FirstChapter/GetCpLibraries.html"><strong aria-hidden="true">3.4.</strong> 如何获取cp-library值</a></li><li class="chapter-item expanded "><a href="../FirstChapter/SupportInheritsFrom.html"><strong aria-hidden="true">3.5.</strong> 支持inheritsFrom下的MC</a></li><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/LaunchIntro.html"><strong aria-hidden="true">3.6.</strong> 启动游戏！</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/ReplaceTemplate.html"><strong aria-hidden="true">3.6.1.</strong> 替换字符串模板并启动游戏</a></li><li class="chapter-item expanded "><a href="../FirstChapter/LaunchGame/UnzipNative.html"><strong aria-hidden="true">3.6.2.</strong> 解压Natives文件</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../SecondChapter/Intro.html"><strong aria-hidden="true">4.</strong> 第二章：账号部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../SecondChapter/OfflineLogin.html"><strong aria-hidden="true">4.1.</strong> 离线登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/MicrosoftLogin.html"><strong aria-hidden="true">4.2.</strong> 微软登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/OAuthLogin.html"><strong aria-hidden="true">4.3.</strong> 微软OAuth登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/AuthlibInjectorLogin.html"><strong aria-hidden="true">4.4.</strong> Authlib-Injector第三方登录</a></li><li class="chapter-item expanded "><a href="../SecondChapter/RefreshLogin.html" class="active"><strong aria-hidden="true">4.5.</strong> 刷新账号</a></li><li class="chapter-item expanded "><a href="../SecondChapter/OfflineSkin.html"><strong aria-hidden="true">4.6.</strong> 离线登录皮肤</a></li></ol></li><li class="chapter-item expanded "><a href="../ThirdChapter/Intro.html"><strong aria-hidden="true">5.</strong> 第三章：下载部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ThirdChapter/GetMCData.html"><strong aria-hidden="true">5.1.</strong> 获取MC元数据</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/DownloadLibraries.html"><strong aria-hidden="true">5.2.</strong> 下载libraries</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/DownloadAssets.html"><strong aria-hidden="true">5.3.</strong> 下载assets</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/SupportThread.html"><strong aria-hidden="true">5.4.</strong> 支持多线程下载</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/LaunchDownloadMC.html"><strong aria-hidden="true">5.5.</strong> 启动自己下载过后的MC</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/Intro.html"><strong aria-hidden="true">5.6.</strong> 模组加载器</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/SupportFabricQuilt.html"><strong aria-hidden="true">5.6.1.</strong> 支持Fabric、Quilt自动安装</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/ModLoader/SupportNeoForge.html"><strong aria-hidden="true">5.6.2.</strong> 支持NeoForge自动安装</a></li></ol></li><li class="chapter-item expanded "><a href="../ThirdChapter/CompleteMissingFiles.html"><strong aria-hidden="true">5.7.</strong> 补全MC的缺失文件</a></li><li class="chapter-item expanded "><a href="../ThirdChapter/CheckFileHash.html"><strong aria-hidden="true">5.8.</strong> 校验文件的hash值</a></li></ol></li><li class="chapter-item expanded "><a href="../TutorWriteTime.html"><strong aria-hidden="true">6.</strong> 教程书写时间</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Let us Make A Minecraft Launcher</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="本篇教程将是最短的教程了因为前面我们的工作已经做得非常完美了"><a class="header" href="#本篇教程将是最短的教程了因为前面我们的工作已经做得非常完美了">本篇教程将是最短的教程了！因为前面我们的工作已经做得非常完美了！</a></h1>
+<p>首先，我们得知道，在前面几个章节，我们已经做了充足的准备了，因此我们只需要做一个按钮用于刷新我们的账号部分，即可了！</p>
+<p>众所周知，我们所有的启动验证令牌，也就是我们的AccessToken，其实是有时效性的，其中AccessToken有24小时，而RefreshToken有1个月，因此，我们需要让玩家在AccessToken过期的时候，及时让他们刷新启动令牌，否则启动游戏后会直接显示无法进入Realms和多人游戏啦！</p>
+<p><font color=red>首先，先给大家提个醒，在PCL2、HMCL、BakaXL等众多第三方启动器中，一般是会直接在启动游戏时先对网站进行判断是否过期，如果不是，则无需重置，如果是，则为玩家重置一次账号部分！</font><font color=blue>但是我的示例教程启动器为了更加方便演示，我就直接用按钮写了……而且注意一点，我的启动器在启动时，不会检测AccessToken是否过期，将会直接拼接AccessToken。</font><font color=green>所以，判断AccessToken是否过期这种操作，就留给大家当作作业了，大家自己去看看wiki上是怎么写有关于判断过期的，我这里就不多说了哈！</font></p>
+<p>我把微软的Microsoft登录，微软的OAuth登录以及Authlib-Injector登录的刷新都给大家写上去吧了，大家尽情观看吧！</p>
+<pre><code class="language-cs">//重置账号的按钮
+procedure TForm3.Button7Click(Sender: TObject);
+begin
+  if tp = -1 then
+  begin //判断是否登录过账号，如果暂未登录，则返回！
+    messagebox(Handle, '你还没有选择登陆任何一个账号，请选择一个然后再重置吧！', '暂未选择，请重试', MB_ICONERROR);
+    exit;
+  end;
+  var pdmic: Boolean;
+  var pdthr: Boolean;
+  var pdoah: Boolean;
+  try //判断是否找得到账号，同时判断是否为微软登录。
+    var acc := ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).GetValue('type').Value;
+    pdmic := acc &lt;&gt; 'microsoft'; //判断acc是否不等于microsoft，以下均是如此
+    pdthr := acc &lt;&gt; 'authlib-injector';
+    pdoah := acc &lt;&gt; 'oauth';
+    if pdmic and pdthr and pdoah then raise Exception.Create('Read Account Error'); //判断是否为微软或者外置。
+  except //此处，如果选择了离线登录的话，则跳出报错！
+    messagebox(Handle, '离线登录不能重置！', '离线登录不能重置', MB_OK+MB_ICONERROR);
+    exit;
+  end; //如果确认重置了的话，
+  if messagebox(Handle, '是否真的需要重置【微软/外置】登录？可能会需要等待久一点，不过你可以等的是么？', '是否需要', MB_YESNO+MB_ICONINFORMATION) = 6 then begin //选择重置
+    if not pdmic then begin //此时选中的是重置普通微软账号
+      var cpro: TProc := procedure begin
+        try //给其重置，定义一个accm变量，用于调用refresh_token。
+          var accm := Account.InitializeAccount(((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).GetValue('refresh_token').Value, 'refresh');
+          var at := accm.GetAccessToken;  //获取AccessToken，如果获取成功且不为noneaccount的话，则往下
+          if at = 'noneaccount' then begin
+            exit;
+          end;
+          var rt := accm.GetRefreshToken; //获取RefreshToken
+          var uu := accm.GetUUID; //获取UUID
+          var un := accm.GetUserName;
+          var sk := accm.GetHeadSkin;
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).RemovePair('name');
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).RemovePair('uuid');
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).RemovePair('access_token');
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).RemovePair('refresh_token');//删除键
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).AddPair('name', un);
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).AddPair('uuid', uu);
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).AddPair('access_token', at);
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).AddPair('refresh_token', rt);//增加键
+          messagebox(Handle, '重置成功！', '重置成功', MB_ICONINFORMATION); //重置完成时会有个信息框提示
+        except  //如果获取不了，则抛出报错。
+          messagebox(Handle, '你的refresh_token似乎也过期了呢！请尝试删除账号，重新登录一次吧！当然啦，或许只是网络不好的原因吧。。', '依旧过期', MB_OK+MB_ICONERROR); //如果无法重置，则抛出一个报错。例如在InitializeAccount的时候出现错误。
+          exit;
+        end;
+      end;
+      TTask.Run(cpro);//使用一个另一线程执行以上操作。
+    end;
+    if not pdoah then begin
+      TTask.Run(procedure begin //这里用了一个更加简便的方式，直接用TTask.Run里面包住一个procedure，其实这就相当于C#中的lambda表达式啦！
+        try //这里，我们需要获取两个东西，第一个就是我们的client_id，第二个就是我们的refresh_token了，CLIENT_ID我们其实也是需要的噢！
+          var reftoken := ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).GetValue('refresh_token').Value;
+          var accm := Account.InitializeOAuth(CLIENT_ID, reftoken, 'refresh'); //依旧的……
+          var at := accm.GetAccessToken;  //获取AccessToken
+          if at = 'noneaccount' then begin
+            exit;
+          end;
+          var rt := accm.GetRefreshToken; //获取RefreshToken
+          var uu := accm.GetUUID; //获取UUID
+          var un := accm.GetUserName;
+          var sk := accm.GetHeadSkin;
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).RemovePair('name');
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).RemovePair('uuid');
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).RemovePair('access_token');
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).RemovePair('refresh_token');//删除键
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).AddPair('name', un);
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).AddPair('uuid', uu);
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).AddPair('access_token', at);
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).AddPair('refresh_token', rt);//增加键
+          messagebox(Handle, '重置成功！', '重置成功', MB_ICONINFORMATION);
+        except
+          messagebox(Handle, '你的refresh_token似乎也过期了呢！请尝试删除账号，重新登录一次吧！当然啦，或许只是网络不好的原因吧。。', '依旧过期', MB_OK+MB_ICONERROR);
+          exit;
+        end;
+      end);
+    end;
+    if not pdthr then begin //这里，我们使用的是第三方登录噢！
+      var cpro: TProc := procedure begin //又用回老方法了……
+        try //这里我们就不定义变量了，采取换行的措施来搞！首先，我们获取了server，然后是access_token，然后是client_token，然后是uuid，然后是name。
+          var taccm := Account.InitializeAccount(
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).GetValue('server').Value,
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).GetValue('access_token').Value,
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).GetValue('client_token').Value,
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).GetValue('uuid').Value,
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).GetValue('name').Value, 'refresh'); //最后添加一个refresh，然后右括号结尾！
+          var ttat := taccm.GetThirdAccessToken; //是的，此时我们获取的是GetThirdAccesssToken，这个在上一章节我们没有说到，不过大家应该会自己写了吧……
+          if ttat = 'noneaccount' then begin
+            exit;
+          end;
+          var ttct := taccm.GetThirdClientToken; //剩下的都是老样子了……
+          var ttun := taccm.GetThirdUserName;
+          var ttuu := taccm.GetThirdUUID;
+          var ttsk := taccm.GetThirdHeadSkin;
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).RemovePair('name');
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).RemovePair('uuid');
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).RemovePair('access_token');
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).RemovePair('client_token');//删除键
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).AddPair('name', ttun);
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).AddPair('uuid', ttuu);
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).AddPair('access_token', ttat);
+          ((AccountJson.GetValue('account') as TJsonArray)[tp] as TJsonObject).AddPair('client_token', ttct);//增加键
+          messagebox(Handle, '重置完成！', '重置完成', MB_OK+MB_ICONINFORMATION);
+        except
+          messagebox(Handle, '你的refresh_token似乎过期很久了呢！请尝试删除账号，重新登录一次吧！当然啦，或许只是网络不好的原因吧。。', '依旧过期', MB_OK+MB_ICONERROR);
+          exit;
+        end;
+      end; //这里还是一个TTask.Run。。
+      TTask.Run(cpro);
+    end; //但是其实，我倒是感觉这个TTask可以直接包在外面而不是包在里面，如果包在里面的话，我得用3个同样的代码块，而包在外面，里面用if-else的话，应该会简便一些代码……
+  end;
+end;
+</code></pre>
+<p>好了，要说的代码其实也就只有这么点点，当我们点击刷新账号的按钮，然后点击保存并退出之后，我们就可以将新的AccessToken颁发给玩家用于启动游戏啦！！</p>
+<p><font color=green>还是那句老话，如果大家想在启动游戏时自动为玩家重置，大家大可以自行查询wiki，我就不多说了！好的咩！</font></p>
+<p>2023.8.26解释：</p>
+<p>鬼知道当初我为什么在前面声明三个bool变量，原来当初的我啥也不会啊……</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../SecondChapter/AuthlibInjectorLogin.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../SecondChapter/OfflineSkin.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../SecondChapter/AuthlibInjectorLogin.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../SecondChapter/OfflineSkin.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
